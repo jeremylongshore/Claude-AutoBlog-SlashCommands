@@ -1,6 +1,15 @@
 # Claude AutoBlog Slash Commands
 
-Automated blog publishing workflow for Claude Code. Analyze your development work, generate contextual blog posts, and deploy to production Hugo sites - all with a single slash command.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
+[![Claude Code](https://img.shields.io/badge/Claude_Code-v1.0.123+-blue.svg)](https://docs.claude.com/en/docs/claude-code)
+[![Platform Support](https://img.shields.io/badge/Platforms-5-orange.svg)](#platform-support)
+[![Active](https://img.shields.io/badge/Status-Production_Ready-success.svg)](#status)
+[![Maintained](https://img.shields.io/badge/Maintained-Yes-green.svg)](#contributing)
+
+Automated blog publishing workflow for Claude Code. Analyze your development work, generate contextual blog posts, and deploy to production - all with a single slash command.
+
+**Supports:** Hugo • Jekyll • Gatsby • Next.js • WordPress
 
 ## What This Does
 
@@ -14,50 +23,78 @@ Transform your development sessions into published blog posts automatically:
 
 **Zero friction. Complete automation. Professional results.**
 
-## Commands Included
+## Platform Support
 
-### `/blog-startaitools`
-**Technical blog posts for developer audiences**
-- Deep technical content with implementation details
-- Captures complete problem-solving journey
-- Includes troubleshooting and iterations
-- Cross-links to related posts automatically
-- Hugo static site deployment
+Choose the command that matches your blog platform:
 
-View the command file: [`commands/blog-startaitools.md`](commands/blog-startaitools.md)
+| Platform | Command Template | Features |
+|----------|-----------------|----------|
+| **Hugo** | `blog-hugo-technical.md` | Static site, YAML/TOML front matter, fast builds |
+| **Jekyll** | `blog-jekyll-technical.md` | GitHub Pages compatible, Ruby-based, simple setup |
+| **Gatsby** | `blog-gatsby-technical.md` | React-based, GraphQL queries, modern stack |
+| **Next.js** | `blog-nextjs-technical.md` | App/Pages Router, MDX support, Vercel deployment |
+| **WordPress** | `blog-wordpress-technical.md` | WP-CLI or REST API, largest CMS, plugin ecosystem |
 
-### `/blog-jeremylongshore`
-**Portfolio blog posts for professional audiences**
-- Career-focused narrative
-- Demonstrates problem-solving capabilities
-- Professional tone for employers/clients
-- Highlights skills and growth
-- Hugo static site deployment
+### Example Commands (Hugo - Original)
 
-View the command file: [`commands/blog-jeremylongshore.md`](commands/blog-jeremylongshore.md)
+**`/blog-startaitools`** - Technical blog for developer audiences
+View file: [`commands/blog-startaitools.md`](commands/blog-startaitools.md)
+
+**`/blog-jeremylongshore`** - Portfolio blog for professional audiences
+View file: [`commands/blog-jeremylongshore.md`](commands/blog-jeremylongshore.md)
+
+### Platform-Specific Commands
+
+**Jekyll:** [`commands/blog-jekyll-technical.md`](commands/blog-jekyll-technical.md)
+**Gatsby:** [`commands/blog-gatsby-technical.md`](commands/blog-gatsby-technical.md)
+**Next.js:** [`commands/blog-nextjs-technical.md`](commands/blog-nextjs-technical.md)
+**WordPress:** [`commands/blog-wordpress-technical.md`](commands/blog-wordpress-technical.md)
 
 ## Quick Start
 
-### 1. Install Commands
+### One-Command Install (Copy & Paste)
+
+**Got Claude Code? Install in 30 seconds:**
+
+```bash
+cd /tmp && git clone https://github.com/jeremylongshore/Claude-AutoBlog-SlashCommands.git && cp Claude-AutoBlog-SlashCommands/commands/*.md ~/.claude/commands/ && echo "✅ Installed! Choose a command to customize:" && ls -1 ~/.claude/commands/blog-*.md
+```
+
+This installs all platform commands. Pick one that matches your blog platform and customize it.
+
+### Manual Install
 
 ```bash
 # Clone this repository
 cd ~/projects
-git clone https://github.com/jeremylongshore/claude-AutoBlog-SlashCommands.git
+git clone https://github.com/jeremylongshore/Claude-AutoBlog-SlashCommands.git
 
-# Copy commands to your Claude commands directory
-cp claude-AutoBlog-SlashCommands/commands/*.md ~/.claude/commands/
+# Copy ALL platform commands (choose what you need)
+cp Claude-AutoBlog-SlashCommands/commands/*.md ~/.claude/commands/
+
+# OR copy only your platform's command
+cp Claude-AutoBlog-SlashCommands/commands/blog-hugo-technical.md ~/.claude/commands/blog-myblog.md
+# (Rename to match your use case: blog-myblog, blog-technical, blog-portfolio, etc.)
 ```
 
 ### 2. Customize for Your Blog
 
-Edit the command files in `commands/` to point to your blog:
-- Update blog post directory paths (search for `/home/jeremy/`)
-- Adjust Hugo build commands
-- Modify front matter format (YAML/TOML)
+Each command file includes a **"Customization Required"** section. Edit your copied command:
+
+**Universal Changes:**
+- Update blog content directory paths
+- Adjust build commands for your setup
+- Modify front matter format
 - Customize tone and structure
 
-See the command files for inline comments on what to change.
+**Platform-Specific:**
+- **Hugo:** Content path, theme config, build flags
+- **Jekyll:** `_posts/` location, bundle exec, categories
+- **Gatsby:** Content directory, GraphQL schema, slug format
+- **Next.js:** App/Pages Router, MDX config, routing style
+- **WordPress:** WP-CLI or REST API, authentication, taxonomy IDs
+
+Each command file has inline documentation for required customizations.
 
 ### 3. Use In Any Project
 
@@ -114,17 +151,31 @@ These commands document themselves:
 
 ## Requirements
 
+**Universal:**
 - Claude Code CLI (v1.0.123+)
-- Hugo static site generator
 - Git repository with remote
-- Netlify or similar auto-deploy setup
+- Your blog's deployment pipeline configured
+
+**Platform-Specific:**
+- **Hugo:** Hugo v0.100+ installed
+- **Jekyll:** Ruby, Bundler, Jekyll gem
+- **Gatsby:** Node.js, npm/yarn, Gatsby CLI
+- **Next.js:** Node.js, npm/yarn/pnpm
+- **WordPress:** WP-CLI or REST API access with authentication
 
 ## Command Files
 
-- [`commands/blog-startaitools.md`](commands/blog-startaitools.md) - Technical blog command with inline documentation
-- [`commands/blog-jeremylongshore.md`](commands/blog-jeremylongshore.md) - Portfolio blog command with inline documentation
+### Hugo Commands (Original)
+- [`commands/blog-startaitools.md`](commands/blog-startaitools.md) - Technical blog for startaitools.com
+- [`commands/blog-jeremylongshore.md`](commands/blog-jeremylongshore.md) - Portfolio blog for jeremylongshore.com
 
-Both command files include detailed instructions on what they do and how to customize them.
+### Platform Templates
+- [`commands/blog-jekyll-technical.md`](commands/blog-jekyll-technical.md) - Jekyll static site generator
+- [`commands/blog-gatsby-technical.md`](commands/blog-gatsby-technical.md) - Gatsby React-based framework
+- [`commands/blog-nextjs-technical.md`](commands/blog-nextjs-technical.md) - Next.js with App/Pages Router
+- [`commands/blog-wordpress-technical.md`](commands/blog-wordpress-technical.md) - WordPress CMS via CLI/API
+
+All command files include detailed customization instructions.
 
 ## How It Works
 
@@ -153,12 +204,19 @@ Creates blog post with:
 ### The Publishing Phase
 
 After your approval:
-1. Creates `.md` file in blog `content/posts/`
-2. Runs `hugo --gc --minify --cleanDestinationDir`
+1. Creates content file in platform-specific location
+2. Runs build command to verify (Hugo, Jekyll, Gatsby, Next.js) or publishes directly (WordPress)
 3. Verifies build succeeds (stops if errors)
-4. Commits: `feat: add blog post - [title]`
-5. Pushes to origin (triggers deployment)
+4. Git commit: `feat: add blog post - [title]`
+5. Git push to trigger deployment (or WordPress REST API publish)
 6. Confirms deployment initiated
+
+**Platform-Specific Publishing:**
+- **Hugo:** `hugo --gc --minify --cleanDestinationDir`
+- **Jekyll:** `bundle exec jekyll build`
+- **Gatsby:** `gatsby build` or `npm run build`
+- **Next.js:** `npm run build` then deploy to Vercel/Netlify
+- **WordPress:** WP-CLI `wp post create` or REST API `POST /wp/v2/posts`
 
 ## Why This Matters
 
@@ -209,10 +267,14 @@ Human judgment maintains quality:
 
 Found these commands useful? Ways to contribute:
 
-1. **Share your customizations** - PR your adapted commands
-2. **Report issues** - Let us know what doesn't work
-3. **Suggest features** - Ideas for improvements
-4. **Add examples** - Show what you've generated
+1. **Share your customizations** - PR your adapted commands for different platforms
+2. **Report issues** - [Open an issue](https://github.com/jeremylongshore/Claude-AutoBlog-SlashCommands/issues/new) for bugs or problems
+3. **Suggest features** - [Request features](https://github.com/jeremylongshore/Claude-AutoBlog-SlashCommands/issues/new) for improvements
+4. **Add examples** - Show generated posts and use cases
+5. **Improve documentation** - Help make setup guides clearer
+6. **Star the repo** - Help others discover these commands
+
+**PRs Welcome!** All contributions are appreciated. See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
 ## License
 
@@ -228,9 +290,16 @@ MIT License - see [LICENSE](LICENSE) file
 
 ## Related Resources
 
+**Claude Code:**
 - [Claude Code Documentation](https://docs.claude.com/en/docs/claude-code)
-- [Hugo Documentation](https://gohugo.io/documentation/)
-- [Blog Post: Building These Commands](https://startaitools.com/posts/building-custom-claude-code-slash-commands-complete-journey/) - Complete implementation guide
+- [Blog Post: Building These Commands](https://startaitools.com/posts/building-custom-claude-code-slash-commands-complete-journey/)
+
+**Platform Documentation:**
+- [Hugo](https://gohugo.io/documentation/) - Fast static site generator
+- [Jekyll](https://jekyllrb.com/docs/) - GitHub Pages default
+- [Gatsby](https://www.gatsbyjs.com/docs/) - React-based framework
+- [Next.js](https://nextjs.org/docs) - React production framework
+- [WordPress](https://developer.wordpress.org/) - REST API and WP-CLI
 
 ---
 
