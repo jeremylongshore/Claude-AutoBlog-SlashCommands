@@ -24,7 +24,7 @@ Transform your development sessions into published blog posts automatically:
 - Cross-links to related posts automatically
 - Hugo static site deployment
 
-[Full Documentation →](docs/blog-startaitools.md)
+View the command file: [`commands/blog-startaitools.md`](commands/blog-startaitools.md)
 
 ### `/blog-jeremylongshore`
 **Portfolio blog posts for professional audiences**
@@ -34,7 +34,7 @@ Transform your development sessions into published blog posts automatically:
 - Highlights skills and growth
 - Hugo static site deployment
 
-[Full Documentation →](docs/blog-jeremylongshore.md)
+View the command file: [`commands/blog-jeremylongshore.md`](commands/blog-jeremylongshore.md)
 
 ## Quick Start
 
@@ -51,13 +51,13 @@ cp claude-AutoBlog-SlashCommands/commands/*.md ~/.claude/commands/
 
 ### 2. Customize for Your Blog
 
-Edit the command files to point to your blog:
-- Update blog post directory paths
+Edit the command files in `commands/` to point to your blog:
+- Update blog post directory paths (search for `/home/jeremy/`)
 - Adjust Hugo build commands
 - Modify front matter format (YAML/TOML)
 - Customize tone and structure
 
-[Customization Guide →](docs/customization.md)
+See the command files for inline comments on what to change.
 
 ### 3. Use In Any Project
 
@@ -119,13 +119,12 @@ These commands document themselves:
 - Git repository with remote
 - Netlify or similar auto-deploy setup
 
-## Documentation
+## Command Files
 
-- [Installation & Setup](docs/installation.md) - Detailed setup instructions
-- [Customization Guide](docs/customization.md) - Adapt for your blog
-- [Command Documentation](docs/blog-startaitools.md) - How each command works
-- [Output Examples](examples/output-examples.md) - Real generated posts
-- [Troubleshooting](docs/troubleshooting.md) - Common issues and solutions
+- [`commands/blog-startaitools.md`](commands/blog-startaitools.md) - Technical blog command with inline documentation
+- [`commands/blog-jeremylongshore.md`](commands/blog-jeremylongshore.md) - Portfolio blog command with inline documentation
+
+Both command files include detailed instructions on what they do and how to customize them.
 
 ## How It Works
 
@@ -231,7 +230,7 @@ MIT License - see [LICENSE](LICENSE) file
 
 - [Claude Code Documentation](https://docs.claude.com/en/docs/claude-code)
 - [Hugo Documentation](https://gohugo.io/documentation/)
-- [Creating Custom Commands Guide](docs/creating-commands.md)
+- [Blog Post: Building These Commands](https://startaitools.com/posts/building-custom-claude-code-slash-commands-complete-journey/) - Complete implementation guide
 
 ---
 
