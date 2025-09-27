@@ -301,6 +301,9 @@ MIT License - see [LICENSE](LICENSE) file
 - [Next.js](https://nextjs.org/docs) - React production framework
 - [WordPress](https://developer.wordpress.org/) - REST API and WP-CLI
 
+**Project Website:**
+- [View the monospace-themed docs site](https://jeremylongshore.github.io/Claude-AutoBlog-SlashCommands/) - Clean, developer-focused aesthetic
+
 ---
 
 **Status:** Production-ready, actively maintained
