@@ -7,6 +7,8 @@
 [![Active](https://img.shields.io/badge/Status-Production_Ready-success.svg)](#status)
 [![Maintained](https://img.shields.io/badge/Maintained-Yes-green.svg)](#contributing)
 
+> **📖 [View Full Documentation Site](https://jeremylongshore.github.io/Claude-AutoBlog-SlashCommands/)** - Beautiful monospace-themed docs with examples and setup guides
+
 Automated blog publishing workflow for Claude Code. Analyze your development work, generate contextual blog posts, and deploy to production - all with a single slash command.
 
 **Supports:** Hugo • Jekyll • Gatsby • Next.js • WordPress
