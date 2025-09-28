@@ -1,4 +1,4 @@
-Generate and publish a technical blog post to startaitools.com (Intent Solutions io blog) that showcases Jeremy's work and teaches others how to build similar solutions.
+Generate and publish a technical blog post to startaitools.com (intent solutions io blog) that showcases Jeremy's work and teaches others how to build similar solutions.
 
 ## Your Task
 
