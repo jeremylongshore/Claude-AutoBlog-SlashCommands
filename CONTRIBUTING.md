@@ -1,242 +1,230 @@
-# Contributing to Claude AutoBlog Slash Commands
+# Contributing to Content-Nuke-Claude
 
-Thank you for considering contributing! This project helps developers automate blog publishing across multiple platforms, and community contributions make it better for everyone.
+Thank you for your interest in contributing to Content-Nuke-Claude! This document provides guidelines for contributing to this next-generation content automation platform.
 
-## Ways to Contribute
+## 📋 Table of Contents
 
-### 1. Report Issues
-Found a bug or problem?
-- [Open an issue](https://github.com/jeremylongshore/Claude-AutoBlog-SlashCommands/issues/new)
-- Include your platform (Hugo, Jekyll, Gatsby, Next.js, WordPress)
-- Describe what you expected vs. what happened
-- Include error messages if applicable
+- [Code of Conduct](#code-of-conduct)
+- [Getting Started](#getting-started)
+- [Development Setup](#development-setup)
+- [Contribution Types](#contribution-types)
+- [Development Workflow](#development-workflow)
+- [Testing Requirements](#testing-requirements)
+- [Documentation Guidelines](#documentation-guidelines)
+- [Pull Request Process](#pull-request-process)
+- [Community](#community)
 
-### 2. Request Features
-Have an idea for improvement?
-- [Open a feature request](https://github.com/jeremylongshore/Claude-AutoBlog-SlashCommands/issues/new)
-- Describe the use case
-- Explain how it would help others
-- Provide examples if possible
+## 📜 Code of Conduct
 
-### 3. Add Platform Support
-Want to add support for another blogging platform?
-- Fork the repository
-- Create a new command file: `commands/blog-[platform]-technical.md`
-- Follow the existing command structure
-- Include customization instructions
-- Update README with new platform
-- Submit a pull request
+This project adheres to the [Contributor Covenant Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to [jeremy@intentsolutions.io](mailto:jeremy@intentsolutions.io).
 
-### 4. Share Customizations
-Have a useful variation of an existing command?
-- Share your customized command
-- Explain what makes it different
-- Provide context on your use case
-- Submit via pull request or issue
+## 🚀 Getting Started
 
-### 5. Improve Documentation
-Found something unclear?
-- Fix typos or clarify instructions
-- Add examples or screenshots
-- Improve setup guides
-- Update platform-specific docs
+### Prerequisites
 
-### 6. Share Examples
-Generated great posts with these commands?
-- Share links to published posts
-- Explain your workflow
-- Showcase different use cases
-- Help others see real-world results
+- **Claude Code CLI** (v1.0.123+)
+- **Git** with SSH keys configured
+- **Python 3.8+** for automation scripts
+- **Node.js 18+** for documentation site
+- **Blog platform** (Hugo, Jekyll, Gatsby, Next.js, or WordPress)
 
-## Pull Request Process
+### Quick Setup
 
-### Before Submitting
-1. **Fork the repository** on GitHub
-2. **Clone your fork** locally
-3. **Create a branch** for your changes: `git checkout -b feature/your-feature-name`
-4. **Make your changes** following the guidelines below
-5. **Test your changes** with Claude Code CLI
-6. **Commit with clear messages** describing what you changed and why
+```bash
+# Clone the repository
+git clone https://github.com/jeremylongshore/content-nuke-claude.git
+cd content-nuke-claude
 
-### Submitting
-1. **Push to your fork:** `git push origin feature/your-feature-name`
-2. **Open a pull request** from your fork to the main repository
-3. **Describe your changes:**
-   - What does this PR do?
-   - Why is this change needed?
-   - How was it tested?
-   - Any breaking changes?
+# Install commands
+cp commands/*.md ~/.claude/commands/
 
-### After Submitting
-- Respond to feedback from maintainers
-- Make requested changes if needed
-- Be patient - reviews may take a few days
-
-## Command File Guidelines
-
-When adding or modifying command files:
-
-### Structure
-```markdown
-Brief description of what this command does.
-
-## Your Task
-
-1. **Analyze ENTIRE Working Session**
-   [Analysis instructions]
-
-2. **Find Cross-Links**
-   [Cross-linking instructions]
-
-3. **Write the Blog Post**
-   [Generation instructions]
-
-4. **Show Draft for Review**
-   [Review process]
-
-5. **Publish (After Approval)**
-   [Publishing steps]
-
-## Key Principles
-[Guiding principles]
-
-## Critical Reminders
-[Important notes]
-
-## Customization Required
-[What users need to change]
-
-## Example Invocation
-[How to use the command]
+# Test command discovery
+cd ~/test-project
+/content-nuke --help
 ```
 
-### Content Requirements
-- **Clear instructions** for Claude on what to do
-- **Platform-specific details** (file paths, build commands, front matter format)
-- **Customization section** explaining what users need to change
-- **Example invocation** showing how to use the command
-- **Inline comments** explaining important decisions
+## 🛠️ Development Setup
 
-### Best Practices
-- Use absolute paths in examples (users replace with their paths)
-- Include both successful and error scenarios
-- Explain WHY things work a certain way
-- Test with Claude Code before submitting
-- Follow existing command structure for consistency
+### Environment Configuration
 
-## Documentation Guidelines
-
-### README Updates
-- Add new platforms to the platform support table
-- Update command count badges
-- Add links to new command files
-- Keep examples consistent
-- Maintain existing formatting
-
-### Setup Guides
-- Include prerequisites (tools, versions)
-- Provide step-by-step instructions
-- Show example configurations
-- Include troubleshooting tips
-- Test on fresh installations
-
-### Code Examples
-- Use real, working examples
-- Include explanatory comments
-- Show both successful and error cases
-- Format code consistently
-- Test all commands before documenting
-
-## Testing Your Contribution
-
-Before submitting:
-
-1. **Test the command with Claude Code:**
+1. **Set up Waygate MCP** for credential management:
    ```bash
-   cp your-command.md ~/.claude/commands/
-   cd test-project/
-   /your-command-name
+   # Configure API credentials in Waygate .env
+   X_CLIENT_ID=your_oauth2_client_id
+   X_CLIENT_SECRET=your_oauth2_client_secret
+   X_API_KEY=your_api_key
+   X_API_SECRET=your_api_secret
    ```
 
-2. **Verify the generated post:**
-   - Check front matter format
-   - Verify build succeeds
-   - Confirm git commit/push works
-   - Test deployment if applicable
+2. **Configure analytics database**:
+   ```bash
+   # Ensure analytics directory exists
+   mkdir -p /home/jeremy/analytics/databases/
+   ```
 
-3. **Test on multiple scenarios:**
-   - New project (no prior posts)
-   - Project with existing posts
-   - Project with recent commits
-   - Project with long conversation history
+3. **Set up blog platforms** (see [Platform Setup Guide](docs/platform-setup.html))
 
-4. **Document any issues encountered** and how you resolved them
+### Dependencies
 
-## Style Guidelines
+```bash
+# Python dependencies for automation scripts
+pip install requests requests-oauthlib python-dotenv
 
-### Markdown
-- Use headings hierarchy (h1 → h2 → h3)
-- Include code blocks with language tags
-- Use bold for **emphasis** on key points
-- Use lists for step-by-step instructions
-- Keep line length reasonable (80-100 chars)
+# Node.js dependencies for documentation
+npm install -g hugo
+```
 
-### Writing Style
-- Write for developers (technical but clear)
-- Be concise and direct
-- Use active voice ("Run the command" not "The command should be run")
-- Include "why" explanations, not just "what"
-- Avoid jargon without explanation
+## 🎯 Contribution Types
 
-### Code Style
-- Use 2 spaces for indentation in YAML
-- Use 4 spaces for indentation in code blocks
-- Follow platform conventions (Hugo YAML, Jekyll conventions, etc.)
-- Comment non-obvious decisions
-- Keep examples realistic
+We welcome contributions in several areas:
 
-## Questions?
+### 1. **New Platform Templates**
+- Support for additional blog platforms
+- Enhanced deployment pipelines
+- Custom build configurations
 
-Not sure about something? Have questions before contributing?
+### 2. **Enhanced Analytics**
+- Improved tracking and insights
+- New metrics and visualizations
+- Performance optimization
 
-- **Open a discussion** on GitHub Discussions (if enabled)
-- **Open an issue** with the "question" label
-- **Check existing issues** - your question may already be answered
-- **Review command files** - see how existing platforms are implemented
+### 3. **API Integrations**
+- Additional social media platforms
+- Enhanced OAuth flows
+- Better error handling
 
-## Code of Conduct
+### 4. **Bug Fixes**
+- Error handling improvements
+- Edge case resolution
+- Performance optimizations
 
-### Be Respectful
-- Treat all contributors with respect
-- Be constructive in feedback
-- Focus on the code, not the person
-- Help newcomers feel welcome
+### 5. **Documentation**
+- Setup guides and tutorials
+- API documentation
+- Example configurations
 
-### Be Collaborative
-- Share knowledge generously
-- Acknowledge others' contributions
-- Work together to solve problems
-- Celebrate successes
+### 6. **Command Improvements**
+- New slash command templates
+- Enhanced content generation
+- Better cross-platform integration
 
-### Be Patient
-- Maintainers are volunteers with limited time
-- Reviews may take a few days
-- Not all PRs will be accepted
-- Rejection isn't personal - keep contributing!
+## 🔄 Development Workflow
 
-## Recognition
+### Branching Strategy
 
-Contributors will be recognized in:
-- GitHub contributors list (automatic)
-- Release notes for significant contributions
-- README credits section (for major features)
+```bash
+# Create feature branch
+git checkout -b feature/your-feature-name
 
-## License
+# Create platform template branch
+git checkout -b platform/platform-name
 
-By contributing, you agree that your contributions will be licensed under the MIT License, the same as the rest of the project.
+# Create bugfix branch
+git checkout -b fix/issue-description
+```
+
+### Commit Message Format
+
+Use conventional commits for clear history:
+
+```
+type(scope): description
+
+feat(commands): add WordPress REST API integration
+fix(analytics): resolve duplicate post tracking
+docs(platform): update Hugo setup guide
+refactor(scripts): improve OAuth error handling
+```
+
+### Testing Your Changes
+
+1. **Test command functionality**:
+   ```bash
+   cd ~/test-project
+   /your-new-command
+   ```
+
+2. **Verify analytics tracking**:
+   ```bash
+   python3 scripts/test_analytics.py
+   ```
+
+3. **Test cross-platform deployment**:
+   ```bash
+   /content-nuke
+   ```
+
+## 🧪 Testing Requirements
+
+### Command Testing
+
+All new commands must include:
+
+1. **Functional testing** with real blog platforms
+2. **Error handling** for common failure scenarios
+3. **Analytics integration** verification
+4. **Documentation** with usage examples
+
+### Script Testing
+
+Python scripts require:
+
+1. **Unit tests** for core functions
+2. **Integration tests** with external APIs
+3. **Error handling** for network failures
+4. **OAuth flow** validation
+
+## 📝 Pull Request Process
+
+### Before Submitting
+
+1. **Test thoroughly** on your local environment
+2. **Update documentation** for any new features
+3. **Add tests** for new functionality
+4. **Check analytics integration** works properly
+5. **Verify command discovery** in Claude Code
+
+### Review Process
+
+1. **Automated checks** must pass
+2. **Manual testing** by maintainers
+3. **Documentation review** for completeness
+4. **Security review** for API integrations
+5. **Merge approval** from project maintainers
+
+## 🚨 Security Guidelines
+
+### API Credentials
+
+- **Never commit** API keys or tokens
+- **Use environment variables** only
+- **Test with test credentials** during development
+- **Document security requirements** clearly
+
+### OAuth Implementation
+
+- **Use secure flows** (OAuth 2.0 with PKCE)
+- **Implement token refresh** automatically
+- **Handle errors gracefully** without exposing credentials
+- **Validate all inputs** and sanitize outputs
+
+## 📞 Community
+
+### Communication Channels
+
+- **GitHub Issues**: Bug reports and feature requests
+- **GitHub Discussions**: General questions and ideas
+- **Email**: [jeremy@intentsolutions.io](mailto:jeremy@intentsolutions.io) for security issues
+
+### Getting Help
+
+1. **Check documentation** first
+2. **Search existing issues** for similar problems
+3. **Create detailed issue** with reproduction steps
+4. **Join discussions** for feature ideas
 
 ---
 
-**Thank you for contributing!** Every contribution, no matter how small, makes this project better for everyone.
+**Thank you for contributing to Content-Nuke-Claude!** Your contributions help make content automation more accessible and powerful for the entire Claude Code community.
 
-Questions? [Open an issue](https://github.com/jeremylongshore/Claude-AutoBlog-SlashCommands/issues/new) or reach out to [@jeremylongshore](https://github.com/jeremylongshore).
+For questions about contributing, reach out to [jeremy@intentsolutions.io](mailto:jeremy@intentsolutions.io) or create an issue in this repository.

@@ -126,15 +126,23 @@ This command creates a blog post for startaitools.com (technical audience) AND g
 
 8. **Save X Thread**
    - Save thread to `/home/jeremy/projects/blog/x-threads/YYYY-MM-DD-slug-startai-x[size].txt`
-   - Format for easy copy-paste
+   - Format for easy copy-paste with TL;DR at START of first tweet
    - Include posting instructions
    - Include blog post URL for cross-reference
 
-9. **Confirm Deployment**
-   - Verify blog build succeeded
-   - Confirm blog deployment initiated
-   - Report live blog URL
-   - Provide X thread file location
+9. **Track Analytics (NEW)**
+   - Import analytics helpers: `sys.path.append('/home/jeremy/analytics')`
+   - Auto-add blog post: `auto_add_blog_post(blog_file_path, 'startaitools')`
+   - Auto-add X thread: `auto_add_x_thread(thread_file_path, blog_post_slug)`
+   - Update monthly analytics: `update_monthly_analytics('startaitools')`
+   - Report analytics summary: word count, character count, thread details
+
+10. **Confirm Deployment**
+    - Verify blog build succeeded
+    - Confirm blog deployment initiated
+    - Report live blog URL
+    - Provide X thread file location
+    - Show analytics tracking confirmation
 
 ## Key Principles
 
@@ -150,7 +158,8 @@ This command creates a blog post for startaitools.com (technical audience) AND g
 
 ## Thread Best Practices
 
-- **Hook in first tweet** - grab attention immediately
+- **TL;DR at START** - put key insight first (not at bottom) for fast scrollers
+- **Hook in first tweet** - grab attention immediately after TL;DR
 - **Technical but accessible** - explain jargon briefly
 - **One idea per tweet** - keep it scannable
 - **Strong CTA** - drive traffic back to full post
