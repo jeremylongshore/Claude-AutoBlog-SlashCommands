@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="Jeremy Longshore" />
+  <meta name="description" content="Automated blog publishing workflow for Claude Code. Supports Hugo, Jekyll, Gatsby, Next.js, and WordPress." />
+  <title>Claude AutoBlog Slash Commands</title>
+  <link rel="stylesheet" href="assets/css/reset.css" />
+  <link rel="stylesheet" href="assets/css/index.css" />
+</head>
+<body>
+<table class="header">
+  <tr>
+    <td colspan="2" rowspan="2" class="width-auto">
+      <h1 class="title">Claude AutoBlog Slash Commands</h1>
+      <span class="subtitle">Automated blog publishing for developers</span>
+    </td>
+    <th>Version</th>
+    <td class="width-min">v1.1.0</td>
+  </tr>
+  <tr>
+    <th>Updated</th>
+    <td class="width-min"><time style="white-space: pre;">2025-09-27</time></td>
+  </tr>
+  <tr>
+    <th class="width-min">Author</th>
+    <td class="width-auto"><a href="https://jeremylongshore.com"><cite>Jeremy Longshore</cite></a> / intent solutions io</td>
+    <th class="width-min">License</th>
+    <td>MIT</td>
+  </tr>
+</table>
+
+<nav id="TOC" role="doc-toc">
+<h2 id="toc-title">Contents</h2>
+<ul class="incremental">
+<li><a href="#what-this-does">What This Does</a></li>
+<li><a href="#platform-support">Platform Support</a></li>
+<li><a href="#quick-start">Quick Start</a></li>
+<li><a href="#features">Key Features</a></li>
+<li><a href="#examples">Real-World Examples</a></li>
+<li><a href="#github">GitHub Repository</a></li>
+</ul>
+</nav>
+
+<h2 id="what-this-does">What This Does</h2>
+<p>Transform your development sessions into published blog posts automatically:</p>
+
+<figure>
+<pre>
+┌─────────────────────────────────────────────────────────┐
+│  1. Work on project                                     │
+│     └─ Write code, solve problems, iterate              │
+│                                                          │
+│  2. Run command:  /blog-myblog                          │
+│     └─ Claude analyzes git + conversation + files       │
+│                                                          │
+│  3. Review generated draft                              │
+│     └─ Complete post with cross-links and SEO           │
+│                                                          │
+│  4. Approve                                             │
+│     └─ Auto-publish: build, commit, push, deploy        │
+│                                                          │
+│  5. Live in 2 minutes                                   │
+│     └─ Professional blog post on your site              │
+└─────────────────────────────────────────────────────────┘
+</pre>
+<figcaption>
+Zero friction. Complete automation. Professional results.
+</figcaption>
+</figure>
+
+<h2 id="platform-support">Platform Support</h2>
+<p>Choose the command that matches your blog platform:</p>
+
+<table>
+<thead>
+<tr>
+<th class="width-min">Platform</th>
+<th class="width-auto">Command Template</th>
+<th class="width-auto">Features</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Hugo</strong></td>
+<td><code>blog-hugo-technical.md</code></td>
+<td>Static site, YAML/TOML front matter, fast builds</td>
+</tr>
+<tr>
+<td><strong>Jekyll</strong></td>
+<td><code>blog-jekyll-technical.md</code></td>
+<td>GitHub Pages compatible, Ruby-based, simple setup</td>
+</tr>
+<tr>
+<td><strong>Gatsby</strong></td>
+<td><code>blog-gatsby-technical.md</code></td>
+<td>React-based, GraphQL queries, modern stack</td>
+</tr>
+<tr>
+<td><strong>Next.js</strong></td>
+<td><code>blog-nextjs-technical.md</code></td>
+<td>App/Pages Router, MDX support, Vercel deployment</td>
+</tr>
+<tr>
+<td><strong>WordPress</strong></td>
+<td><code>blog-wordpress-technical.md</code></td>
+<td>WP-CLI or REST API, largest CMS, plugin ecosystem</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="quick-start">Quick Start</h2>
+
+<h3>One-Command Install (Copy & Paste)</h3>
+<p><strong>Got Claude Code? Install in 30 seconds:</strong></p>
+
+<pre><code>cd /tmp && git clone https://github.com/jeremylongshore/Claude-AutoBlog-SlashCommands.git && cp Claude-AutoBlog-SlashCommands/commands/*.md ~/.claude/commands/ && echo "✅ Installed! Choose a command to customize:" && ls -1 ~/.claude/commands/blog-*.md</code></pre>
+
+<p>This installs all platform commands. Pick one that matches your blog platform and customize it.</p>
+
+<h3>What Gets Installed</h3>
+<ul class="tree">
+<li>
+<p style="margin: 0;"><strong>~/.claude/commands/</strong></p>
+<ul class="incremental">
+<li>blog-startaitools.md<br /></li>
+<li>blog-jeremylongshore.md<br /></li>
+<li>blog-hugo-technical.md<br /></li>
+<li>blog-jekyll-technical.md<br /></li>
+<li>blog-gatsby-technical.md<br /></li>
+<li>blog-nextjs-technical.md<br /></li>
+<li>blog-wordpress-technical.md</li>
+</ul>
+</li>
+</ul>
+
+<h3>Customize for Your Blog</h3>
+<p>Each command file includes a <strong>"Customization Required"</strong> section:</p>
+
+<ol class="incremental" type="1">
+<li>Pick command matching your platform</li>
+<li>Update blog content directory paths</li>
+<li>Adjust build commands for your setup</li>
+<li>Modify front matter format (if needed)</li>
+<li>Customize tone and structure preferences</li>
+</ol>
+
+<p>See the <a href="PLATFORM_SETUP.html">Platform Setup Guide</a> for detailed instructions.</p>
+
+<h2 id="features">Key Features</h2>
+
+<h3>Context-Aware Analysis</h3>
+<ul class="incremental">
+<li>Git commits since last blog post</li>
+<li>Complete conversation history from working session</li>
+<li>Project files, TODOs, and documentation</li>
+<li>Captures the journey, not just the destination</li>
+</ul>
+
+<h3>Smart Content Generation</h3>
+<ul class="incremental">
+<li>Technical depth appropriate for audience</li>
+<li>Shows troubleshooting and iterative refinements</li>
+<li>Includes code examples and architecture decisions</li>
+<li>Cross-links to 2-3 related existing posts</li>
+</ul>
+
+<h3>Full Pipeline Automation</h3>
+<ul class="incremental">
+<li>Creates markdown file in blog directory</li>
+<li>Runs platform-specific build to verify no errors</li>
+<li>Git commits with proper message format</li>
+<li>Pushes to trigger deployment (Netlify/Vercel/GitHub Pages)</li>
+</ul>
+
+<h3>Quality Control</h3>
+<ul class="incremental">
+<li>Shows complete draft for review</li>
+<li>You approve before publishing</li>
+<li>Edit capability for refinements</li>
+<li>Maintains professional standards</li>
+</ul>
+
+<h2 id="examples">Real-World Examples</h2>
+<p>These commands document themselves:</p>
+
+<h3>Technical Post (startaitools.com)</h3>
+<p><a href="https://startaitools.com/posts/building-custom-claude-code-slash-commands-complete-journey/">Building Custom Claude Code Slash Commands</a></p>
+<ul class="incremental">
+<li>330 lines of technical content</li>
+<li>Complete implementation journey</li>
+<li>Troubleshooting steps included</li>
+<li>Educational for developers</li>
+</ul>
+
+<h3>Portfolio Post (jeremylongshore.com)</h3>
+<p><a href="https://jeremylongshore.com/posts/automating-developer-workflows-custom-ai-commands/">Automating Developer Workflows</a></p>
+<ul class="incremental">
+<li>136 lines of professional narrative</li>
+<li>Problem-solving capabilities showcased</li>
+<li>Career-focused presentation</li>
+<li>Resume-building content</li>
+</ul>
+
+<h2 id="github">GitHub Repository</h2>
+<p><strong>Repository:</strong> <a href="https://github.com/jeremylongshore/Claude-AutoBlog-SlashCommands">github.com/jeremylongshore/Claude-AutoBlog-SlashCommands</a></p>
+
+<nav>
+<button onclick="window.location.href='https://github.com/jeremylongshore/Claude-AutoBlog-SlashCommands'">
+View on GitHub
+</button>
+<button onclick="window.location.href='https://github.com/jeremylongshore/Claude-AutoBlog-SlashCommands/issues'">
+Report Issue
+</button>
+<button onclick="window.location.href='PLATFORM_SETUP.html'">
+Setup Guide
+</button>
+</nav>
+
+<hr>
+
+<h3>Philosophy</h3>
+<p>These commands don't just document final solutions - they capture:</p>
+<ul class="incremental">
+<li>Problems you faced</li>
+<li>Solutions you tried that didn't work</li>
+<li>Troubleshooting steps</li>
+<li>Iterative refinements</li>
+<li>What you learned</li>
+</ul>
+<p><strong>Readers learn more from seeing the process than just the result.</strong></p>
+
+<h3>Different Audiences, Different Narratives</h3>
+<p>Same work can be presented differently:</p>
+<ul class="incremental">
+<li><strong>Technical blog:</strong> Deep implementation details for developers</li>
+<li><strong>Portfolio blog:</strong> Problem-solving capabilities for employers</li>
+</ul>
+<p>Same analysis, different presentation.</p>
+
+<h3>Contributing</h3>
+<p>Found these commands useful? Ways to contribute:</p>
+<ol class="incremental" type="1">
+<li>Share your customizations - PR your adapted commands</li>
+<li>Report issues - Let us know what doesn't work</li>
+<li>Suggest features - Ideas for improvements</li>
+<li>Add examples - Show what you've generated</li>
+<li>Star the repo - Help others discover it</li>
+</ol>
+
+<p><strong>PRs Welcome!</strong> See <a href="https://github.com/jeremylongshore/Claude-AutoBlog-SlashCommands/blob/main/CONTRIBUTING.md">CONTRIBUTING.md</a> for guidelines.</p>
+
+<hr>
+
+<p><strong>Status:</strong> Production-ready, actively maintained</p>
+<p><em>These commands are used daily to maintain two active blog sites with 50+ technical posts combined.</em></p>
+
+<p style="text-align: center; margin-top: 2em;">
+Made with ❤️ by <a href="https://jeremylongshore.com">Jeremy Longshore</a> / <a href="https://startaitools.com">intent solutions io</a>
+</p>
+
+  <div class="debug-grid"></div>
+  <script src="assets/js/index.js"></script>
+</body>
+</html>

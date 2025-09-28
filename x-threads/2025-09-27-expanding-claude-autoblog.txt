@@ -1,0 +1,48 @@
+TWITTER/X THREAD - Expanding Claude AutoBlog
+Date: 2025-09-27
+Blog Post: https://startaitools.com/posts/expanding-claude-autoblog-multi-platform-monospace/
+Status: Ready to post
+
+═══════════════════════════════════════════════════════════
+
+TWEET 1/3:
+🧵 Expanded an open-source blog automation tool from 1 platform to 5 in <8 hours.
+
+How? Separate universal logic from platform adapters.
+
+Hugo • Jekyll • Gatsby • Next.js • WordPress
+
+All use same analysis engine. 👇
+
+═══════════════════════════════════════════════════════════
+
+TWEET 2/3:
+Each platform gets:
+• Custom command template
+• Platform-specific paths & build commands
+• 400+ line setup guide
+• One-command install
+
+Plus monospace GitHub Pages site for docs.
+
+═══════════════════════════════════════════════════════════
+
+TWEET 3/3:
+Full writeup:
+https://startaitools.com/posts/expanding-claude-autoblog-multi-platform-monospace/
+
+Repo:
+https://github.com/jeremylongshore/Claude-AutoBlog-SlashCommands
+
+⭐ contributions welcome
+
+#DevTools #OpenSource
+
+═══════════════════════════════════════════════════════════
+
+POSTING INSTRUCTIONS:
+1. Post Tweet 1
+2. Reply to Tweet 1 with Tweet 2
+3. Reply to Tweet 2 with Tweet 3
+
+Thread saved: 2025-09-27 19:45

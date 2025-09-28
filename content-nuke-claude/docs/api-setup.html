@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>X API Setup Guide - Content-Nuke-Claude</title>
+    <meta name="description" content="Complete X (Twitter) API configuration and OAuth 2.0 setup for Content-Nuke-Claude automation system.">
+    <link rel="stylesheet" href="../assets/css/reset.css">
+    <link rel="stylesheet" href="../assets/css/index.css">
+</head>
+<body>
+    <div class="debug-grid"></div>
+
+    <table class="header">
+        <tr>
+            <td>
+                <h1>X API Setup Guide</h1>
+            </td>
+            <td class="width-auto debug-toggle-label">
+                <label>
+                    <input type="checkbox" class="debug-toggle"> Debug Grid
+                </label>
+            </td>
+        </tr>
+    </table>
+
+    <p><a href="../index.html">← Back to Content-Nuke-Claude</a></p>
+
+    <p>Complete guide for setting up X (Twitter) API integration with OAuth 2.0 for automated thread posting in the Content-Nuke-Claude system.</p>
+
+    <h2>🔑 OAuth 2.0 Setup Overview</h2>
+
+    <p>Content-Nuke-Claude uses <strong>OAuth 2.0 with automatic token refresh</strong> for reliable X API integration. This provides secure, automated posting without manual intervention.</p>
+
+    <pre>
+OAuth 2.0 Flow:
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│ Initial Setup   │ →  │ Auto Refresh    │ →  │ Thread Posting  │
+│ (One-time)      │    │ (Every 2 hours) │    │ (Automated)     │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+    </pre>
+
+    <h2>📋 Prerequisites</h2>
+
+    <ol>
+        <li><strong>X Developer Account</strong>: Apply at <a href="https://developer.twitter.com">developer.twitter.com</a></li>
+        <li><strong>App Creation</strong>: Create a new app in the X Developer Portal</li>
+        <li><strong>Read/Write Permissions</strong>: Enable tweet posting permissions</li>
+        <li><strong>OAuth 2.0 Settings</strong>: Configure OAuth 2.0 with PKCE</li>
+    </ol>
+
+    <h2>⚙️ Step-by-Step Configuration</h2>
+
+    <h3>1. Create X Developer App</h3>
+
+    <ol>
+        <li>Go to <a href="https://developer.twitter.com/en/portal/dashboard">X Developer Portal</a></li>
+        <li>Click <strong>"Create App"</strong></li>
+        <li>Fill out app details:
+            <ul>
+                <li><strong>App name</strong>: content-nuke-claude</li>
+                <li><strong>Description</strong>: Automated content publishing system</li>
+                <li><strong>Website URL</strong>: https://github.com/jeremylongshore/content-nuke-claude</li>
+            </ul>
+        </li>
+        <li>Click <strong>"Create"</strong></li>
+    </ol>
+
+    <h3>2. Configure App Permissions</h3>
+
+    <ol>
+        <li>Navigate to your app in the Developer Portal</li>
+        <li>Go to <strong>"Settings"</strong> tab</li>
+        <li>Under <strong>"User authentication settings"</strong>, click <strong>"Set up"</strong></li>
+        <li>Configure OAuth 2.0:
+            <ul>
+                <li><strong>App permissions</strong>: Read and write</li>
+                <li><strong>Type of App</strong>: Web App, Automated App or Bot</li>
+                <li><strong>Callback URI</strong>: https://localhost:8080/callback</li>
+                <li><strong>Website URL</strong>: https://github.com/jeremylongshore/content-nuke-claude</li>
+            </ul>
+        </li>
+        <li>Click <strong>"Save"</strong></li>
+    </ol>
+
+    <h3>3. Get API Credentials</h3>
+
+    <p>Collect these credentials from the X Developer Portal:</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Credential</th>
+                <th>Location</th>
+                <th>Purpose</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>Client ID</code></td>
+                <td>Keys and tokens → OAuth 2.0 Client ID</td>
+                <td>App identification</td>
+            </tr>
+            <tr>
+                <td><code>Client Secret</code></td>
+                <td>Keys and tokens → OAuth 2.0 Client Secret</td>
+                <td>App authentication</td>
+            </tr>
+            <tr>
+                <td><code>API Key</code></td>
+                <td>Keys and tokens → Consumer Keys</td>
+                <td>OAuth 1.0a compatibility</td>
+            </tr>
+            <tr>
+                <td><code>API Secret</code></td>
+                <td>Keys and tokens → Consumer Keys</td>
+                <td>OAuth 1.0a compatibility</td>
+            </tr>
+            <tr>
+                <td><code>Bearer Token</code></td>
+                <td>Keys and tokens → Bearer Token</td>
+                <td>App-only authentication</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>🔧 Environment Configuration</h2>
+
+    <h3>Waygate MCP Environment Setup</h3>
+
+    <p>Content-Nuke-Claude uses Waygate MCP for secure credential management. Add these variables to your Waygate <code>.env</code> file:</p>
+
+    <pre><code># X (Twitter) API OAuth 2.0 Configuration
+X_CLIENT_ID=your_oauth2_client_id_here
+X_CLIENT_SECRET=your_oauth2_client_secret_here
+X_OAUTH2_ACCESS_TOKEN=your_access_token_here
+X_OAUTH2_REFRESH_TOKEN=your_refresh_token_here
+
+# X (Twitter) API OAuth 1.0a Configuration
+X_API_KEY=your_api_key_here
+X_API_SECRET=your_api_secret_here
+
+# X (Twitter) Bearer Token
+X_BEARER_TOKEN=your_bearer_token_here</code></pre>
+
+    <h3>Getting Initial Access Tokens</h3>
+
+    <p>Use the OAuth 2.0 PKCE setup script to get your initial tokens:</p>
+
+    <pre><code>cd /home/jeremy/projects/content-nuke/scripts/
+python3 oauth2_pkce_setup.py</code></pre>
+
+    <p>This script will:</p>
+    <ol>
+        <li>Generate a secure code verifier and challenge</li>
+        <li>Open your browser to X's authorization page</li>
+        <li>Handle the callback and exchange code for tokens</li>
+        <li>Display access_token and refresh_token for your .env file</li>
+    </ol>
+
+    <h2>🔄 Automatic Token Refresh</h2>
+
+    <p>Content-Nuke-Claude automatically refreshes OAuth 2.0 tokens before posting to prevent expiration issues.</p>
+
+    <h3>How Auto-Refresh Works</h3>
+
+    <pre>
+Before Every X Thread Post:
+┌─────────────────┐    ┌─────────────────┐    ┌─────────────────┐
+│ Check Token Age │ →  │ Refresh if      │ →  │ Post Thread     │
+│ (< 2 hours)     │    │ Needed          │    │ Successfully    │
+└─────────────────┘    └─────────────────┘    └─────────────────┘
+    </pre>
+
+    <h3>Manual Token Refresh</h3>
+
+    <p>If needed, manually refresh tokens:</p>
+
+    <pre><code>cd /home/jeremy/projects/content-nuke/scripts/
+python3 refresh_tokens.py</code></pre>
+
+    <h2>🧪 Testing Your Setup</h2>
+
+    <h3>Test API Connection</h3>
+
+    <pre><code>cd /home/jeremy/projects/content-nuke/scripts/
+python3 post_x_thread.py test-connection</code></pre>
+
+    <h3>Test Thread Posting</h3>
+
+    <p>Create a test thread file:</p>
+
+    <pre><code>echo "This is a test thread from Content-Nuke-Claude! 🚀
+
+All API integrations working perfectly. Ready for automated content deployment!" > test-thread.txt
+
+python3 post_x_thread.py test-thread.txt</code></pre>
+
+    <h2>🔒 Security Best Practices</h2>
+
+    <ul>
+        <li><strong>Never commit credentials</strong>: Keep all API keys in .env files only</li>
+        <li><strong>Monitor usage</strong>: Check X Developer Portal for unusual activity</li>
+        <li><strong>Rotate tokens</strong>: Regenerate credentials if accidentally exposed</li>
+        <li><strong>Restrict permissions</strong>: Use minimum required permissions (read/write)</li>
+        <li><strong>Backup refresh tokens</strong>: Store refresh tokens securely for recovery</li>
+    </ul>
+
+    <h2>❌ Troubleshooting</h2>
+
+    <h3>Common Issues</h3>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Error</th>
+                <th>Cause</th>
+                <th>Solution</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><code>401 Unauthorized</code></td>
+                <td>Expired or invalid token</td>
+                <td>Run token refresh script</td>
+            </tr>
+            <tr>
+                <td><code>403 Forbidden</code></td>
+                <td>Insufficient permissions</td>
+                <td>Check app read/write settings</td>
+            </tr>
+            <tr>
+                <td><code>429 Too Many Requests</code></td>
+                <td>Rate limit exceeded</td>
+                <td>Wait 15 minutes, retry</td>
+            </tr>
+            <tr>
+                <td>Environment not found</td>
+                <td>Missing Waygate .env file</td>
+                <td>Check Waygate MCP configuration</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Debug Mode</h3>
+
+    <p>Enable debug mode for detailed API response logging:</p>
+
+    <pre><code>export DEBUG_X_API=true
+python3 post_x_thread.py your-thread.txt</code></pre>
+
+    <h2>📚 API Reference</h2>
+
+    <p><strong>Official Documentation</strong></p>
+    <ul>
+        <li><a href="https://developer.twitter.com/en/docs/twitter-api">X API Documentation</a></li>
+        <li><a href="https://developer.twitter.com/en/docs/authentication/oauth-2-0">OAuth 2.0 Guide</a></li>
+        <li><a href="https://developer.twitter.com/en/docs/twitter-api/tweets/manage-tweets/api-reference/post-tweets">Post Tweet API</a></li>
+    </ul>
+
+    <p><strong>Content-Nuke-Claude Scripts</strong></p>
+    <ul>
+        <li><code>oauth2_pkce_setup.py</code> - Initial OAuth 2.0 setup</li>
+        <li><code>refresh_tokens.py</code> - Manual token refresh</li>
+        <li><code>post_x_thread.py</code> - Thread posting with auto-refresh</li>
+    </ul>
+
+    <hr>
+
+    <p><a href="../index.html">← Back to Content-Nuke-Claude</a></p>
+
+    <table class="footer">
+        <tr>
+            <td>
+                <strong>X API Setup Guide</strong> - Complete OAuth 2.0 configuration
+            </td>
+            <td align="right">
+                Made with ❤️ using <a href="https://owickstrom.github.io/the-monospace-web/">The Monospace Web</a>
+            </td>
+        </tr>
+    </table>
+
+    <script src="../assets/js/index.js"></script>
+</body>
+</html>

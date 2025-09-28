@@ -1,0 +1,8 @@
+# Core dependencies for Content Nuke automation platform
+requests>=2.28.0
+python-dotenv>=0.19.0
+
+# Optional social media dependencies
+# Install with: pip install -r requirements.txt -r requirements-social.txt
+# tweepy>=4.14.0
+# linkedin-api>=2.0.0
