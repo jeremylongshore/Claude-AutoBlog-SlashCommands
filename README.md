@@ -9,9 +9,9 @@
 
 > **📖 [View Full Documentation Site](https://jeremylongshore.github.io/Claude-AutoBlog-SlashCommands/)** - Beautiful monospace-themed docs with examples and setup guides
 
-Automated blog publishing workflow for Claude Code. Analyze your development work, generate contextual blog posts, and deploy to production - all with a single slash command.
+Automated blog publishing workflow for Claude Code. Analyze your development work, generate contextual blog posts, create Twitter/X threads, and deploy to production - all with a single slash command.
 
-**Supports:** Hugo • Jekyll • Gatsby • Next.js • WordPress
+**Supports:** Hugo • Jekyll • Gatsby • Next.js • WordPress • Twitter/X Threads
 
 ## What This Does
 
@@ -25,9 +25,37 @@ Transform your development sessions into published blog posts automatically:
 
 **Zero friction. Complete automation. Professional results.**
 
-## Platform Support
+## Available Commands
 
-Choose the command that matches your blog platform:
+### Blog-Only Commands
+Generate and publish blog posts without Twitter/X promotion:
+
+| Command | Purpose | Output |
+|---------|---------|---------|
+| `/blog-startaitools` | Technical blog for developers | → startaitools.com |
+| `/blog-jeremylongshore` | Portfolio blog for professionals | → jeremylongshore.com |
+| `/blog-both-sites` | Dual-audience publishing | → Both sites |
+
+### Blog + X Thread Commands
+Generate blog posts AND Twitter/X threads in one command:
+
+| Command | Purpose | Asks | Output |
+|---------|---------|------|--------|
+| `/blog-startai-x` | Technical blog + X thread | Thread size? (1-7) | → startaitools.com + X thread |
+| `/blog-jeremy-x` | Portfolio blog + X thread | Thread size? (1-7) | → jeremylongshore.com + X thread |
+| `/blog-both-x` | Both blogs + X thread | Thread size? (1-7) | → Both sites + X thread |
+
+**Thread sizes:**
+- **1** = Single tweet
+- **2** = Mini thread (2 tweets)
+- **3** = Quick thread (3 tweets)
+- **4** = Short thread (4 tweets)
+- **5** = Standard thread (5 tweets)
+- **6** = Medium thread (6 tweets)
+- **7** = Extended thread (7 tweets)
+
+### Platform Templates
+Customize these templates for your blogging platform:
 
 | Platform | Command Template | Features |
 |----------|-----------------|----------|
@@ -36,21 +64,6 @@ Choose the command that matches your blog platform:
 | **Gatsby** | `blog-gatsby-technical.md` | React-based, GraphQL queries, modern stack |
 | **Next.js** | `blog-nextjs-technical.md` | App/Pages Router, MDX support, Vercel deployment |
 | **WordPress** | `blog-wordpress-technical.md` | WP-CLI or REST API, largest CMS, plugin ecosystem |
-
-### Example Commands (Hugo - Original)
-
-**`/blog-startaitools`** - Technical blog for developer audiences
-View file: [`commands/blog-startaitools.md`](commands/blog-startaitools.md)
-
-**`/blog-jeremylongshore`** - Portfolio blog for professional audiences
-View file: [`commands/blog-jeremylongshore.md`](commands/blog-jeremylongshore.md)
-
-### Platform-Specific Commands
-
-**Jekyll:** [`commands/blog-jekyll-technical.md`](commands/blog-jekyll-technical.md)
-**Gatsby:** [`commands/blog-gatsby-technical.md`](commands/blog-gatsby-technical.md)
-**Next.js:** [`commands/blog-nextjs-technical.md`](commands/blog-nextjs-technical.md)
-**WordPress:** [`commands/blog-wordpress-technical.md`](commands/blog-wordpress-technical.md)
 
 ## Quick Start
 
@@ -167,9 +180,15 @@ These commands document themselves:
 
 ## Command Files
 
-### Hugo Commands (Original)
-- [`commands/blog-startaitools.md`](commands/blog-startaitools.md) - Technical blog for startaitools.com
-- [`commands/blog-jeremylongshore.md`](commands/blog-jeremylongshore.md) - Portfolio blog for jeremylongshore.com
+### Blog-Only Commands
+- [`commands/blog-startaitools.md`](commands/blog-startaitools.md) - Technical blog only
+- [`commands/blog-jeremylongshore.md`](commands/blog-jeremylongshore.md) - Portfolio blog only
+- [`commands/blog-both-sites.md`](commands/blog-both-sites.md) - Both blogs
+
+### Blog + X Thread Commands
+- [`commands/blog-startai-x.md`](commands/blog-startai-x.md) - Technical blog + X thread
+- [`commands/blog-jeremy-x.md`](commands/blog-jeremy-x.md) - Portfolio blog + X thread
+- [`commands/blog-both-x.md`](commands/blog-both-x.md) - Both blogs + X thread
 
 ### Platform Templates
 - [`commands/blog-jekyll-technical.md`](commands/blog-jekyll-technical.md) - Jekyll static site generator
