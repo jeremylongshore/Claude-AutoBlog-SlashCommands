@@ -303,7 +303,7 @@ MIT License - see [LICENSE](LICENSE) file
 
 ## Author
 
-**Jeremy Longshore** / Intent Solutions Inc
+**Jeremy Longshore** / Intent Solutions io
 
 - Technical Blog: [startaitools.com](https://startaitools.com)
 - Portfolio: [jeremylongshore.com](https://jeremylongshore.com)
