@@ -94,12 +94,19 @@ Once approved:
    - **Access Token**
    - **Access Token Secret**
 
-### Step 8: Configure Permissions
+### Step 8: Configure Permissions ⚠️ CRITICAL
 
 1. **Go to "Settings" tab**
 2. **Under "App permissions"** click **"Edit"**
 3. **Select "Read and write"**
 4. **Save changes**
+5. **IMPORTANT: Regenerate access tokens after changing permissions**
+
+**⚠️ Common Issue:** If you get "oauth1-permissions" errors when posting tweets, your app needs **Elevated access**. Apply for Elevated access (still free) in your developer portal.
+
+**Access Levels:**
+- **Essential** (default): Read-only operations, bearer token only
+- **Elevated** (free): Read/write operations, OAuth 1.0a posting, higher rate limits
 
 ## Environment Configuration
 
@@ -228,6 +235,12 @@ curl -X POST "https://api.twitter.com/2/tweets" \
 ## Troubleshooting
 
 ### Common Issues
+
+**"oauth1-permissions" error when posting:**
+- Your app needs Elevated access (not just Essential)
+- Apply for Elevated access in Developer Portal (still free)
+- Regenerate access tokens after getting Elevated access
+- Essential access only allows read operations
 
 **"Unknown app" error:**
 - Ensure app permissions are set to "Read and write"
