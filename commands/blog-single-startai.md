@@ -124,11 +124,16 @@ This command creates a blog post for startaitools.com (technical audience) AND g
    - Git commit: "feat: add blog post - [title]"
    - Git push to trigger Netlify deployment
 
-8. **Save X Thread**
-   - Save thread to `/home/jeremy/projects/blog/x-threads/YYYY-MM-DD-slug-startai-x[size].txt`
-   - Format for easy copy-paste with TL;DR at START of first tweet
-   - Include posting instructions
-   - Include blog post URL for cross-reference
+8. **Post X Thread Directly**
+   - **Load X API credentials from Waygate MCP:**
+     ```bash
+     export X_API_KEY="thpZd6tCyjgYJVTr0waBx2RolP"
+     export X_API_SECRET="tAnB8BhULV3J4sfP2HC5qSot5ShVHKxoNP60UoJWBlqZpFOTnh9"
+     export X_OAUTH2_ACCESS_TOKEN="YjJUUFJTN3g5Zl91eFJ2cjZGUEV6Q0k4OFdUYUpFOFF5X3Jmc3R6aXpzMkMzOjE3NTkwNDIwMTg0NzE6MTowOmF0OjE"
+     ```
+   - **Post thread directly to X/Twitter**
+   - **Chain replies for multi-tweet threads**
+   - **Save thread with metadata:** `/home/jeremy/projects/blog/x-threads/YYYY-MM-DD-slug-startai-x[size].md`
 
 9. **Track Analytics (NEW)**
    - Import analytics helpers: `sys.path.append('/home/jeremy/analytics')`

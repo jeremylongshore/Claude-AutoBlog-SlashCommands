@@ -139,11 +139,32 @@ This command creates TWO blog posts (technical + portfolio) AND generates a Twit
    - Git commit: "feat: add blog post - [title]"
    - Git push to trigger Netlify deployment
 
-10. **Save X Thread**
-    - Save thread to `/home/jeremy/projects/blog/x-threads/YYYY-MM-DD-slug-both-x[size].txt`
-    - Format for easy copy-paste
-    - Include posting instructions
-    - Include BOTH blog post URLs for cross-reference
+10. **Post X Thread Directly**
+    - **Load X API credentials from Waygate MCP:**
+      ```bash
+      export X_API_KEY="thpZd6tCyjgYJVTr0waBx2RolP"
+      export X_API_SECRET="tAnB8BhULV3J4sfP2HC5qSot5ShVHKxoNP60UoJWBlqZpFOTnh9"
+      export X_OAUTH2_ACCESS_TOKEN="YjJUUFJTN3g5Zl91eFJ2cjZGUEV6Q0k4OFdUYUpFOFF5X3Jmc3R6aXpzMkMzOjE3NTkwNDIwMTg0NzE6MTowOmF0OjE"
+      ```
+    - **Post first tweet:**
+      ```bash
+      curl -X POST "https://api.twitter.com/2/tweets" \
+        -H "Authorization: Bearer $X_OAUTH2_ACCESS_TOKEN" \
+        -H "Content-Type: application/json" \
+        -d '{"text": "Tweet 1 content here"}'
+      ```
+    - **For multi-tweet threads, chain replies:**
+      ```bash
+      # Get tweet ID from first response, then:
+      curl -X POST "https://api.twitter.com/2/tweets" \
+        -H "Authorization: Bearer $X_OAUTH2_ACCESS_TOKEN" \
+        -H "Content-Type: application/json" \
+        -d '{"text": "Tweet 2 content", "reply": {"in_reply_to_tweet_id": "FIRST_TWEET_ID"}}'
+      ```
+    - **Save thread with metadata:**
+      - File: `/home/jeremy/projects/blog/x-threads/YYYY-MM-DD-slug-both-x[size].md`
+      - Include: Tweet IDs, timestamps, character counts, engagement tracking
+      - Format for analytics and future reference
 
 11. **Confirm All Deployments**
     - Verify both blog builds succeeded

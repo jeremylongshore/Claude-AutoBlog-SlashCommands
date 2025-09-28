@@ -82,23 +82,21 @@ If text exceeds 280 characters:
 
 ## X API Integration
 
-### Using Existing Credentials
-```python
-X_CLIENT_ID = "VXpOWXBxNDJWbWZVWU5VOGE2Rm46MTpjaQ"
-X_CLIENT_SECRET = "CUK0B0vkhuytNNbQ3LPVWe6dWwSYgMgsGX2nQiltGWu3Q2TZ-K"
-X_OAUTH2_ACCESS_TOKEN = "ZllRajY2eVVGSDBtR1JqMEFxa1VzV3NCVlN1NkF3OGpSV0hDY1hDMlVGbmoxOjE3NTkwMjI0ODIwOTI6MTowOmF0OjE"
-X_OAUTH2_REFRESH_TOKEN = "VDVPbG5nbG43REpGV0gwR1ExcENidk0yYloweHZzZ0Rkc3ZwNVI2eHJhcE9NOjE3NTkwMjI0ODIwOTM6MToxOnJ0OjE"
+### Using Waygate MCP Credentials
+```bash
+# Load from Waygate MCP .env file
+export X_API_KEY="thpZd6tCyjgYJVTr0waBx2RolP"
+export X_API_SECRET="tAnB8BhULV3J4sfP2HC5qSot5ShVHKxoNP60UoJWBlqZpFOTnh9"
+export X_OAUTH2_ACCESS_TOKEN="YjJUUFJTN3g5Zl91eFJ2cjZGUEV6Q0k4OFdUYUpFOFF5X3Jmc3R6aXpzMkMzOjE3NTkwNDIwMTg0NzE6MTowOmF0OjE"
 ```
 
 ### API Call Structure
-```python
-url = "https://api.twitter.com/2/tweets"
-headers = {
-    'Authorization': f'Bearer {access_token}',
-    'Content-Type': 'application/json'
-}
-payload = {"text": optimized_text}
-response = requests.post(url, headers=headers, json=payload)
+```bash
+# Direct curl implementation
+curl -X POST "https://api.twitter.com/2/tweets" \
+  -H "Authorization: Bearer $X_OAUTH2_ACCESS_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"text": "optimized_text_here"}'
 ```
 
 ## Analytics Tracking
