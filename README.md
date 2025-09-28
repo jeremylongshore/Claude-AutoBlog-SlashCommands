@@ -325,6 +325,10 @@ MIT License - see [LICENSE](LICENSE) file
 **Project Website:**
 - [View the monospace-themed docs site](https://jeremylongshore.github.io/Claude-AutoBlog-SlashCommands/) - Clean, developer-focused aesthetic
 
+**Setup Guides:**
+- [X (Twitter) API Setup Guide](docs/X_API_SETUP.md) - Complete walkthrough for automated thread posting
+- [Platform Setup Guide](docs/PLATFORM_SETUP.md) - Setup instructions for all supported blog platforms
+
 ---
 
 **Status:** Production-ready, actively maintained
