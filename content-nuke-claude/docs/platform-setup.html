@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Platform Setup Guide - Content-Nuke-Claude</title>
+    <meta name="description" content="Complete setup guide for all supported blog platforms in Content-Nuke-Claude: Hugo, Jekyll, Gatsby, Next.js, and WordPress.">
+    <link rel="stylesheet" href="../assets/css/reset.css">
+    <link rel="stylesheet" href="../assets/css/index.css">
+</head>
+<body>
+    <div class="debug-grid"></div>
+
+    <table class="header">
+        <tr>
+            <td>
+                <h1>Platform Setup Guide</h1>
+            </td>
+            <td class="width-auto debug-toggle-label">
+                <label>
+                    <input type="checkbox" class="debug-toggle"> Debug Grid
+                </label>
+            </td>
+        </tr>
+    </table>
+
+    <p><a href="../index.html">← Back to Content-Nuke-Claude</a></p>
+
+    <p>Complete setup guide for integrating Content-Nuke-Claude with all supported blog platforms. Choose your platform below for detailed configuration instructions.</p>
+
+    <h2>🏗️ Supported Platforms</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Platform</th>
+                <th>Command Template</th>
+                <th>Build System</th>
+                <th>Deployment</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Hugo</strong></td>
+                <td><code>blog-hugo-technical.md</code></td>
+                <td>Go-based static generator</td>
+                <td>Git + Netlify/Vercel</td>
+            </tr>
+            <tr>
+                <td><strong>Jekyll</strong></td>
+                <td><code>blog-jekyll-technical.md</code></td>
+                <td>Ruby-based generator</td>
+                <td>GitHub Pages</td>
+            </tr>
+            <tr>
+                <td><strong>Gatsby</strong></td>
+                <td><code>blog-gatsby-technical.md</code></td>
+                <td>React + GraphQL</td>
+                <td>Gatsby Cloud/Netlify</td>
+            </tr>
+            <tr>
+                <td><strong>Next.js</strong></td>
+                <td><code>blog-nextjs-technical.md</code></td>
+                <td>React + Node.js</td>
+                <td>Vercel/Netlify</td>
+            </tr>
+            <tr>
+                <td><strong>WordPress</strong></td>
+                <td><code>blog-wordpress-technical.md</code></td>
+                <td>PHP + MySQL</td>
+                <td>WP-CLI/REST API</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h2>🚀 Hugo Setup</h2>
+
+    <h3>Prerequisites</h3>
+    <ul>
+        <li>Hugo v0.100+ installed</li>
+        <li>Git repository with remote origin</li>
+        <li>Valid <code>config.toml</code> or <code>hugo.toml</code></li>
+    </ul>
+
+    <h3>Directory Structure</h3>
+    <pre><code>your-hugo-blog/
+├── config.toml (or hugo.toml)
+├── content/
+│   └── posts/
+│       └── [generated-posts].md
+├── themes/
+│   └── your-theme/
+└── static/</code></pre>
+
+    <h3>Command Customization</h3>
+    <p>Copy and customize the Hugo template:</p>
+    <pre><code>cp ~/.claude/commands/blog-hugo-technical.md ~/.claude/commands/blog-myblog.md</code></pre>
+
+    <p>Update these paths in your command file:</p>
+    <pre><code># Blog Configuration
+BLOG_DIR="/path/to/your/hugo/blog"
+CONTENT_DIR="$BLOG_DIR/content/posts"
+BUILD_COMMAND="hugo --gc --minify --cleanDestinationDir"
+DEPLOY_BRANCH="main"</code></pre>
+
+    <h3>Front Matter Format</h3>
+    <p>Hugo posts use YAML front matter:</p>
+    <pre><code>---
+title: "Your Post Title"
+date: 2025-09-28T10:00:00-07:00
+draft: false
+tags: ["tag1", "tag2"]
+categories: ["category"]
+description: "Post description"
+---
+
+Your post content here...</code></pre>
+
+    <h2>🌿 Jekyll Setup</h2>
+
+    <h3>Prerequisites</h3>
+    <ul>
+        <li>Ruby 2.7+ installed</li>
+        <li>Bundler gem installed</li>
+        <li>Jekyll gem installed</li>
+        <li>Valid <code>_config.yml</code></li>
+    </ul>
+
+    <h3>Directory Structure</h3>
+    <pre><code>your-jekyll-blog/
+├── _config.yml
+├── _posts/
+│   └── YYYY-MM-DD-title.md
+├── _site/ (generated)
+└── Gemfile</code></pre>
+
+    <h3>Command Customization</h3>
+    <pre><code>cp ~/.claude/commands/blog-jekyll-technical.md ~/.claude/commands/blog-myblog.md</code></pre>
+
+    <p>Update these paths:</p>
+    <pre><code># Blog Configuration
+BLOG_DIR="/path/to/your/jekyll/blog"
+POSTS_DIR="$BLOG_DIR/_posts"
+BUILD_COMMAND="bundle exec jekyll build"
+DEPLOY_BRANCH="gh-pages"</code></pre>
+
+    <h3>Front Matter Format</h3>
+    <pre><code>---
+layout: post
+title: "Your Post Title"
+date: 2025-09-28 10:00:00 -0700
+categories: [category]
+tags: [tag1, tag2]
+---
+
+Your post content here...</code></pre>
+
+    <h2>⚛️ Gatsby Setup</h2>
+
+    <h3>Prerequisites</h3>
+    <ul>
+        <li>Node.js 18+ installed</li>
+        <li>Gatsby CLI installed globally</li>
+        <li>Valid <code>gatsby-config.js</code></li>
+    </ul>
+
+    <h3>Directory Structure</h3>
+    <pre><code>your-gatsby-blog/
+├── gatsby-config.js
+├── src/
+│   └── content/
+│       └── posts/
+│           └── [generated-posts].md
+├── public/ (generated)
+└── package.json</code></pre>
+
+    <h3>Command Customization</h3>
+    <pre><code>cp ~/.claude/commands/blog-gatsby-technical.md ~/.claude/commands/blog-myblog.md</code></pre>
+
+    <p>Update configuration:</p>
+    <pre><code># Blog Configuration
+BLOG_DIR="/path/to/your/gatsby/blog"
+CONTENT_DIR="$BLOG_DIR/src/content/posts"
+BUILD_COMMAND="gatsby build"
+DEPLOY_COMMAND="gatsby deploy"</code></pre>
+
+    <h3>GraphQL Integration</h3>
+    <p>Ensure your <code>gatsby-config.js</code> includes:</p>
+    <pre><code>module.exports = {
+  plugins: [
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `posts`,
+        path: `${__dirname}/src/content/posts`,
+      },
+    },
+    `gatsby-transformer-remark`,
+  ],
+}</code></pre>
+
+    <h2>⚡ Next.js Setup</h2>
+
+    <h3>Prerequisites</h3>
+    <ul>
+        <li>Node.js 18+ installed</li>
+        <li>Next.js 13+ with App Router</li>
+        <li>MDX support configured</li>
+    </ul>
+
+    <h3>Directory Structure</h3>
+    <pre><code>your-nextjs-blog/
+├── next.config.js
+├── app/
+│   └── blog/
+│       └── [slug]/
+│           └── page.tsx
+├── content/
+│   └── posts/
+│       └── [generated-posts].mdx
+└── package.json</code></pre>
+
+    <h3>MDX Configuration</h3>
+    <p>Install and configure MDX support:</p>
+    <pre><code>npm install @next/mdx @mdx-js/loader @mdx-js/react</code></pre>
+
+    <p>Update <code>next.config.js</code>:</p>
+    <pre><code>const withMDX = require('@next/mdx')({
+  extension: /\.mdx?$/,
+  options: {
+    remarkPlugins: [],
+    rehypePlugins: [],
+  },
+})
+
+module.exports = withMDX({
+  pageExtensions: ['ts', 'tsx', 'js', 'jsx', 'md', 'mdx'],
+})</code></pre>
+
+    <h2>🔧 WordPress Setup</h2>
+
+    <h3>Prerequisites</h3>
+    <ul>
+        <li>WordPress 5.0+ installation</li>
+        <li>WP-CLI installed (recommended)</li>
+        <li>REST API enabled</li>
+        <li>Application passwords configured</li>
+    </ul>
+
+    <h3>WP-CLI Method (Recommended)</h3>
+    <pre><code># Install WP-CLI
+curl -O https://raw.githubusercontent.com/wp-cli/wp-cli/v2.8.1/wp-cli.phar
+chmod +x wp-cli.phar
+sudo mv wp-cli.phar /usr/local/bin/wp</code></pre>
+
+    <h3>Command Customization</h3>
+    <pre><code>cp ~/.claude/commands/blog-wordpress-technical.md ~/.claude/commands/blog-myblog.md</code></pre>
+
+    <p>Update WordPress configuration:</p>
+    <pre><code># WordPress Configuration
+WP_URL="https://yourdomain.com"
+WP_USER="your-username"
+WP_PASSWORD="your-application-password"
+WP_CLI_PATH="/usr/local/bin/wp"</code></pre>
+
+    <h3>REST API Method</h3>
+    <p>Alternative to WP-CLI using WordPress REST API:</p>
+    <pre><code>curl -X POST "https://yourdomain.com/wp-json/wp/v2/posts" \
+  -H "Authorization: Basic $(echo -n 'username:app-password' | base64)" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "title": "Post Title",
+    "content": "Post content",
+    "status": "publish"
+  }'</code></pre>
+
+    <h2>🔄 Deployment Configuration</h2>
+
+    <h3>Git-Based Deployment</h3>
+    <p>Most platforms use git-based deployment:</p>
+
+    <pre><code># Standard deployment workflow
+git add .
+git commit -m "feat: new blog post via Content-Nuke-Claude"
+git push origin main
+
+# Build and deploy (platform-specific)
+hugo --gc --minify                    # Hugo
+bundle exec jekyll build              # Jekyll
+gatsby build && gatsby deploy        # Gatsby
+npm run build && npm run deploy       # Next.js</code></pre>
+
+    <h3>Continuous Deployment</h3>
+    <p>Configure automatic deployment with:</p>
+    <ul>
+        <li><strong>Netlify</strong>: Connect your git repository for automatic builds</li>
+        <li><strong>Vercel</strong>: GitHub integration with zero-config deployment</li>
+        <li><strong>GitHub Pages</strong>: Actions workflow for Jekyll sites</li>
+        <li><strong>Gatsby Cloud</strong>: Direct Gatsby integration</li>
+    </ul>
+
+    <h2>📊 Analytics Integration</h2>
+
+    <p>Content-Nuke-Claude automatically tracks published posts in the analytics database:</p>
+
+    <pre><code># Analytics tracking happens automatically
+# after each successful post publication
+
+Database location: /home/jeremy/analytics/databases/content_analytics.db
+Tables: blog_posts, monthly_analytics, command_executions</code></pre>
+
+    <h3>Manual Analytics Update</h3>
+    <pre><code>cd /home/jeremy/projects/content-nuke/scripts/
+python3 -c "
+from analytics_helpers import auto_add_blog_post
+auto_add_blog_post('/path/to/your/post.md', 'your-site-name')
+"</code></pre>
+
+    <h2>🧪 Testing Your Setup</h2>
+
+    <h3>Test Blog Generation</h3>
+    <pre><code># Test with a single platform command
+cd ~/your-project
+/blog-single-[platform]
+
+# Test with multi-platform command
+/content-nuke</code></pre>
+
+    <h3>Verify Build Process</h3>
+    <pre><code># Manual build test
+cd /path/to/your/blog
+[build-command]  # hugo, jekyll build, gatsby build, etc.
+
+# Check for build errors
+echo $?  # Should return 0 for success</code></pre>
+
+    <h2>❌ Troubleshooting</h2>
+
+    <h3>Common Issues</h3>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Issue</th>
+                <th>Platform</th>
+                <th>Solution</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Build command not found</td>
+                <td>All</td>
+                <td>Check PATH and installation</td>
+            </tr>
+            <tr>
+                <td>Permission denied</td>
+                <td>All</td>
+                <td>Check file permissions and ownership</td>
+            </tr>
+            <tr>
+                <td>Theme not found</td>
+                <td>Hugo/Jekyll</td>
+                <td>Verify theme installation</td>
+            </tr>
+            <tr>
+                <td>Node modules missing</td>
+                <td>Gatsby/Next.js</td>
+                <td>Run npm install in blog directory</td>
+            </tr>
+            <tr>
+                <td>Bundle install failed</td>
+                <td>Jekyll</td>
+                <td>Check Ruby version and Gemfile</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Debug Mode</h3>
+    <pre><code># Enable verbose output for debugging
+export DEBUG_CONTENT_NUKE=true
+/content-nuke</code></pre>
+
+    <h2>📚 Platform Documentation</h2>
+
+    <p><strong>Official Documentation</strong></p>
+    <ul>
+        <li><a href="https://gohugo.io/documentation/">Hugo Documentation</a></li>
+        <li><a href="https://jekyllrb.com/docs/">Jekyll Documentation</a></li>
+        <li><a href="https://www.gatsbyjs.com/docs/">Gatsby Documentation</a></li>
+        <li><a href="https://nextjs.org/docs">Next.js Documentation</a></li>
+        <li><a href="https://developer.wordpress.org/rest-api/">WordPress REST API</a></li>
+    </ul>
+
+    <p><strong>Deployment Platforms</strong></p>
+    <ul>
+        <li><a href="https://docs.netlify.com/">Netlify Documentation</a></li>
+        <li><a href="https://vercel.com/docs">Vercel Documentation</a></li>
+        <li><a href="https://docs.github.com/en/pages">GitHub Pages Documentation</a></li>
+        <li><a href="https://www.gatsbyjs.com/products/cloud/">Gatsby Cloud</a></li>
+    </ul>
+
+    <hr>
+
+    <p><a href="../index.html">← Back to Content-Nuke-Claude</a></p>
+
+    <table class="footer">
+        <tr>
+            <td>
+                <strong>Platform Setup Guide</strong> - Complete blog platform integration
+            </td>
+            <td align="right">
+                Made with ❤️ using <a href="https://owickstrom.github.io/the-monospace-web/">The Monospace Web</a>
+            </td>
+        </tr>
+    </table>
+
+    <script src="../assets/js/index.js"></script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+X Thread: Free API Setup Guide
+Generated: 2025-09-27
+
+=== THREAD (7 tweets) ===
+
+1/7 🆓 Just set up X API for free!
+
+✅ 1,500 tweets/month
+✅ 50 tweets/day
+✅ Read & write access
+✅ $0 cost
+
+Perfect for blog automation and personal projects. The free tier covers most individual use cases perfectly.
+
+---
+
+2/7 📝 Setup is straightforward:
+
+1️⃣ Apply at developer.twitter.com
+2️⃣ Create project & app
+3️⃣ Generate API keys (5 total)
+4️⃣ Set read/write permissions
+5️⃣ Add to environment variables
+
+Takes about 10 minutes, usually approved instantly.
+
+---
+
+3/7 🔑 You need these 5 credentials:
+
+• API Key (Consumer Key)
+• API Secret (Consumer Secret)
+• Bearer Token
+• Access Token
+• Access Token Secret
+
+Store them as environment variables in ~/.bashrc for security.
+
+---
+
+4/7 💡 Perfect for automating:
+
+• Blog post promotion threads
+• Cross-platform content sharing
+• Personal update broadcasting
+• Social media scheduling
+• Content marketing pipelines
+
+All within the generous free limits.
+
+---
+
+5/7 ⚡ Rate limits are reasonable:
+
+• 1,500 tweets/month total
+• 50 tweets/day maximum
+• 300 requests per 15 minutes
+
+For personal use and small projects, this is more than enough. No need to upgrade to paid tiers.
+
+---
+
+6/7 🛠️ Integration is simple:
+
+Most automation tools support X API out of the box. Just add your credentials as environment variables and you're ready to go.
+
+Works with Python, Node.js, curl, and most workflow automation platforms.
+
+---
+
+7/7 🚀 Ready to automate your content?
+
+The free X API tier is perfect for developers who want to streamline their social media presence without breaking the bank.
+
+#TwitterAPI #DevTools #Automation #BlogAutomation #FreeAPI
+
+=== END THREAD ===
+
+Instructions for posting:
+1. Copy each numbered tweet (1/7, 2/7, etc.)
+2. Post them in sequence as a thread
+3. Each tweet should be posted as a reply to the previous one
+4. Wait a few seconds between posts to avoid rate limits
+
+Note: Your X API credentials are working correctly!
+✅ Bearer token generated successfully
+❌ Posting tweets requires OAuth 1.0a User Context authentication (not just Bearer token)
+
+The bearer token works for:
+• Reading timelines
+• Searching tweets
+• Getting user info
+• Other read-only operations
+
+To post tweets programmatically, you need:
+• OAuth 1.0a signature generation
+• User context authentication
+• More complex implementation
+
+For now, manual posting is the simplest approach. Your credentials are valid and ready for a proper OAuth 1.0a implementation when needed.

@@ -10,11 +10,11 @@ import time
 import requests
 
 def load_waygate_credentials():
-    """Load all X API credentials from waygate .env file"""
+    """Load X API credentials from waygate .env file"""
     waygate_env_path = "/home/jeremy/waygate-mcp/.env"
 
     if not os.path.exists(waygate_env_path):
-        return {}
+        return None, None, None
 
     creds = {}
     with open(waygate_env_path, 'r') as f:
@@ -23,14 +23,10 @@ def load_waygate_credentials():
                 key, value = line.strip().split('=', 1)
                 creds[key] = value
 
-    return creds
-
-def load_waygate_oauth2_credentials():
-    """Load OAuth2 credentials specifically"""
-    creds = load_waygate_credentials()
     client_id = creds.get('X_CLIENT_ID')
     client_secret = creds.get('X_CLIENT_SECRET')
     access_token = creds.get('X_OAUTH2_ACCESS_TOKEN')
+
     return client_id, client_secret, access_token
 
 def auto_refresh_x_token():
@@ -38,8 +34,7 @@ def auto_refresh_x_token():
     import subprocess
     import os
 
-    # Use simplified script directory structure
-    script_dir = "/home/jeremy/projects/content-nuke/scripts"
+    script_dir = os.path.dirname(os.path.abspath(__file__))
     refresh_script = os.path.join(script_dir, 'refresh_tokens.py')
 
     try:
@@ -52,62 +47,40 @@ def auto_refresh_x_token():
         return False
 
 def post_tweet(tweet_text, reply_to_id=None):
-    """Post a single tweet using OAuth 1.0a (permanent) or OAuth2 authentication"""
+    """Post a single tweet using OAuth2 authentication"""
 
-    # First try OAuth 1.0a from waygate (PERMANENT TOKENS - never expire!)
-    creds = load_waygate_credentials()
-    oauth1_consumer_key = creds.get('X_API_KEY') if creds else None
-    oauth1_consumer_secret = creds.get('X_API_SECRET') if creds else None
-    oauth1_access_token = creds.get('X_ACCESS_TOKEN') if creds else None
-    oauth1_access_secret = creds.get('X_ACCESS_SECRET') if creds else None
+    # Try to get credentials from environment first (OAuth 1.0a style)
+    consumer_key = os.environ.get('X_API_KEY')
+    consumer_secret = os.environ.get('X_API_SECRET')
+    oauth1_access_token = os.environ.get('X_ACCESS_TOKEN')
+    access_token_secret = os.environ.get('X_ACCESS_SECRET')
 
-    # Also check environment variables
-    env_consumer_key = os.environ.get('X_API_KEY')
-    env_consumer_secret = os.environ.get('X_API_SECRET')
-    env_access_token = os.environ.get('X_ACCESS_TOKEN')
-    env_access_secret = os.environ.get('X_ACCESS_SECRET')
-
-    # Use OAuth 1.0a if available (PERMANENT - never expires!)
-    if all([oauth1_consumer_key, oauth1_consumer_secret, oauth1_access_token, oauth1_access_secret]):
-        print("🔑 Using OAuth 1.0a (permanent tokens)")
+    # If OAuth 1.0a credentials available, use them
+    if all([consumer_key, consumer_secret, oauth1_access_token, access_token_secret]):
         from requests_oauthlib import OAuth1
         auth = OAuth1(
-            oauth1_consumer_key,
-            client_secret=oauth1_consumer_secret,
+            consumer_key,
+            client_secret=consumer_secret,
             resource_owner_key=oauth1_access_token,
-            resource_owner_secret=oauth1_access_secret,
-            signature_method='HMAC-SHA1',
-            signature_type='AUTH_HEADER'
-        )
-        headers = {}
-    elif all([env_consumer_key, env_consumer_secret, env_access_token, env_access_secret]):
-        print("🔑 Using OAuth 1.0a from environment (permanent tokens)")
-        from requests_oauthlib import OAuth1
-        auth = OAuth1(
-            env_consumer_key,
-            client_secret=env_consumer_secret,
-            resource_owner_key=env_access_token,
-            resource_owner_secret=env_access_secret,
+            resource_owner_secret=access_token_secret,
             signature_method='HMAC-SHA1',
             signature_type='AUTH_HEADER'
         )
         headers = {}
     else:
-        # Fallback to OAuth2 (expires every 2 hours - not ideal)
-        print("⚠️  Using OAuth2 (expires every 2 hours)")
-        client_id, client_secret, oauth2_access_token = load_waygate_oauth2_credentials()
+        # Try waygate OAuth2 credentials
+        client_id, client_secret, access_token = load_waygate_credentials()
 
-        if not all([client_id, client_secret, oauth2_access_token]):
+        if not all([client_id, client_secret, access_token]):
             print("❌ Missing X API credentials:")
-            print("   Preferred: OAuth 1.0a (permanent): X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_SECRET")
-            print("   Fallback: OAuth2 (2hr expiry): X_CLIENT_ID, X_CLIENT_SECRET, X_OAUTH2_ACCESS_TOKEN")
-            print("   Run: python3 scripts/get_oauth1_tokens.py")
+            print("   Either set OAuth 1.0a: X_API_KEY, X_API_SECRET, X_ACCESS_TOKEN, X_ACCESS_SECRET")
+            print("   Or ensure waygate .env has: X_CLIENT_ID, X_CLIENT_SECRET, X_OAUTH2_ACCESS_TOKEN")
             return None
 
         # Use OAuth2 Bearer token authentication
         auth = None
         headers = {
-            "Authorization": f"Bearer {oauth2_access_token}",
+            "Authorization": f"Bearer {access_token}",
             "Content-Type": "application/json"
         }
 
@@ -150,7 +123,7 @@ def post_thread(thread_file_path):
 
     print(f"📖 Reading thread from: {thread_file_path}")
 
-    # Auto-refresh OAuth2 token before posting (ensures fresh token)
+    # Auto-refresh X token before posting (X tokens expire every 2 hours)
     print("🔄 Refreshing X API token...")
     if not auto_refresh_x_token():
         print("⚠️  Token refresh failed, attempting with existing token...")
@@ -161,21 +134,24 @@ def post_thread(thread_file_path):
     # Parse thread content - handle Content Nuke format
     tweets = []
 
-    # Use regex to extract TWEET X/Y: sections properly
-    import re
-    tweet_pattern = r'TWEET (\d+)/(\d+):\s*(.*?)(?=TWEET \d+/\d+:|===== CHARACTER COUNTS =====|$)'
-    matches = re.findall(tweet_pattern, content, re.DOTALL)
+    # Split by "---" to separate thread content from instructions
+    parts = content.split('---')
+    thread_content = parts[0].strip()
 
-    for match in matches:
-        tweet_num, total_tweets, tweet_content = match
-        # Clean up the tweet content
-        clean_content = tweet_content.strip()
+    # Split thread content by double newlines (paragraph breaks)
+    paragraphs = [p.strip() for p in thread_content.split('\n\n') if p.strip()]
 
-        # Skip empty tweets
-        if not clean_content:
+    # Each paragraph becomes a tweet
+    for paragraph in paragraphs:
+        # Clean up paragraph text
+        tweet_text = paragraph.strip()
+
+        # Skip empty paragraphs
+        if not tweet_text:
             continue
 
-        tweets.append(clean_content)
+        # Add to tweets list
+        tweets.append(tweet_text)
 
     if not tweets:
         print("❌ No tweets found in thread file")
