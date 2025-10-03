@@ -7,7 +7,7 @@ This command creates TWO blog posts (technical + portfolio) AND generates a Twit
 ### Phase 1: Analyze Working Session (Once)
 
 1. **Analyze ENTIRE Working Session**
-   - **Git History**: Check commits since the most recent post date in `/home/jeremy/projects/blog/startaitools/content/posts/` (fallback: last 14 days)
+   - **Git History**: Check commits since the most recent post date in `/home/jeremy/projects/blog/startaitools/content/posts/` (fallback: last 24 hours)
    - **Current Conversation**: Review the COMPLETE conversation history from this session
      - What problem were we solving?
      - What questions did Jeremy ask?
@@ -68,7 +68,34 @@ This command creates TWO blog posts (technical + portfolio) AND generates a Twit
 
 ### Phase 4: Generate X Thread
 
-6. **Create X Thread Based on Size (Technical Focus)**
+6. **Generate Dual-Audience X Thread (X-Gen-System)**
+
+   **Input Processing:**
+   - Extract insights from both technical and portfolio blog posts
+   - Set X-Gen parameters balancing technical and professional audiences:
+     ```json
+     {
+       "topic": "[session achievement that appeals to both audiences]",
+       "raw": "[insights from both blog posts - technical + professional angle]",
+       "goal": "engagement",
+       "tone": "friendly",
+       "include_link": "[strategically chosen: startaitools or jeremylongshore URL]",
+       "hashtags": ["[cross-audience appealing tags]"],
+       "cta_preference": "ask",
+       "audience_level": "intermediate",
+       "max_posts": "[user-specified 1-7]"
+     }
+     ```
+
+   **Dual-Audience X-Gen Processing:**
+   - Balance technical depth with professional accessibility
+   - Generate hook appealing to both developers and business professionals
+   - Structure content showcasing both technical skills and business impact
+   - Integrate hashtags that span both audiences
+   - Select most strategic blog link based on thread focus
+   - Apply accessibility and professional standards
+
+   **Legacy Size Reference (Now Automated):**
 
    **Size 1 (Single Tweet):**
    - Technical hook + Key insight + Links to BOTH posts + Hashtags
@@ -142,9 +169,9 @@ This command creates TWO blog posts (technical + portfolio) AND generates a Twit
 10. **Post X Thread Directly**
     - **Load X API credentials from Waygate MCP:**
       ```bash
-      export X_API_KEY="thpZd6tCyjgYJVTr0waBx2RolP"
-      export X_API_SECRET="tAnB8BhULV3J4sfP2HC5qSot5ShVHKxoNP60UoJWBlqZpFOTnh9"
-      export X_OAUTH2_ACCESS_TOKEN="YjJUUFJTN3g5Zl91eFJ2cjZGUEV6Q0k4OFdUYUpFOFF5X3Jmc3R6aXpzMkMzOjE3NTkwNDIwMTg0NzE6MTowOmF0OjE"
+      export X_API_KEY="your_api_key_here"
+      export X_API_SECRET="your_api_secret_here"
+      export X_OAUTH2_ACCESS_TOKEN="your_oauth2_access_token_here"
       ```
     - **Post first tweet:**
       ```bash

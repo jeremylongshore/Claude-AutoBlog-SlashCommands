@@ -3,7 +3,7 @@ Generate and publish a portfolio/CV-style blog post to jeremylongshore.com (Jere
 ## Your Task
 
 1. **Analyze ENTIRE Working Session**
-   - **Git History**: Check commits since the most recent post date in `/home/jeremy/projects/blog/jeremylongshore/content/posts/` (fallback: last 14 days)
+   - **Git History**: Check commits since the most recent post date in `/home/jeremy/projects/blog/jeremylongshore/content/posts/` (fallback: last 24 hours)
    - **Current Conversation**: Review the COMPLETE conversation history from this session
      - What challenges did Jeremy tackle?
      - What problem-solving approaches did he use?

@@ -161,24 +161,21 @@ def post_thread(thread_file_path):
     # Parse thread content - handle Content Nuke format
     tweets = []
 
-    # Split by "---" to separate thread content from instructions
-    parts = content.split('---')
-    thread_content = parts[0].strip()
+    # Use regex to extract TWEET X/Y: sections properly
+    import re
+    tweet_pattern = r'TWEET (\d+)/(\d+):\s*(.*?)(?=TWEET \d+/\d+:|===== CHARACTER COUNTS =====|$)'
+    matches = re.findall(tweet_pattern, content, re.DOTALL)
 
-    # Split thread content by double newlines (paragraph breaks)
-    paragraphs = [p.strip() for p in thread_content.split('\n\n') if p.strip()]
+    for match in matches:
+        tweet_num, total_tweets, tweet_content = match
+        # Clean up the tweet content
+        clean_content = tweet_content.strip()
 
-    # Each paragraph becomes a tweet
-    for paragraph in paragraphs:
-        # Clean up paragraph text
-        tweet_text = paragraph.strip()
-
-        # Skip empty paragraphs
-        if not tweet_text:
+        # Skip empty tweets
+        if not clean_content:
             continue
 
-        # Add to tweets list
-        tweets.append(tweet_text)
+        tweets.append(clean_content)
 
     if not tweets:
         print("❌ No tweets found in thread file")

@@ -3,7 +3,7 @@ Generate and publish a technical blog post to your Gatsby blog that showcases yo
 ## Your Task
 
 1. **Analyze ENTIRE Working Session**
-   - **Git History**: Check commits since the most recent post date in your Gatsby `content/posts/` or `src/pages/blog/` directory (fallback: last 14 days)
+   - **Git History**: Check commits since the most recent post date in your Gatsby `content/posts/` or `src/pages/blog/` directory (fallback: last 24 hours)
    - **Current Conversation**: Review the COMPLETE conversation history from this session
      - What problem were we solving?
      - What questions did the user ask?

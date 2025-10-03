@@ -35,8 +35,17 @@ This is a **command-driven automation ecosystem** built around Claude Code slash
 **Content Generation Architecture**
 - Session analysis engine (git history + conversation context)
 - Content adaptation engine (technical vs personal angles)
+- **X-Gen-System**: Advanced X content optimization with MCP integration
 - Intelligent link selection for cross-platform optimization
 - Multi-platform deployment coordination
+
+**X-Gen-System Integration (NEW)**
+- **Character Budgeting**: 280-char limit with URL=23, emoji buffer calculations
+- **Proven Hook Patterns**: Counter-intuitive, mini-case, list-promise, myth-bust templates
+- **MCP Compliance**: 100% schema validation for direct API consumption
+- **Accessibility Standards**: CamelCase hashtags, alt text requirements, ASCII-only
+- **A/B Variant Generation**: Engagement optimization with hook/CTA variants
+- **Error Handling**: Graceful fallback, auto-split algorithm, content recovery
 
 ### Command Categories
 

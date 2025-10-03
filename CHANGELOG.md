@@ -7,6 +7,39 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0.1] - 2025-09-28
+### Security
+- **CRITICAL**: Removed exposed API keys from documentation and command files
+- Replaced all real API credentials with placeholder values
+- Enhanced security documentation with proper credential handling
+
+### Changed
+- Updated all command fallback periods from 14 days to 24 hours for daily usage
+- Improved session analysis focus for frequent content creation
+
+## [2.0.0] - 2025-09-28
+### Added
+- **X-Gen-System Integration**: Complete overhaul of X content generation
+  - Advanced character budgeting with 280-char limit, URL=23, emoji buffer calculations
+  - Proven hook patterns: counter-intuitive, mini-case, list-promise, myth-bust templates
+  - MCP (Master Control Protocol) integration for direct API consumption
+  - 100% schema compliance validation for automated posting
+  - Accessibility standards: CamelCase hashtags, alt text requirements, ASCII-only
+  - A/B variant generation for engagement optimization testing
+  - Graceful error handling with auto-split algorithm and content recovery
+- **Updated Primary Commands**: content-nuke.md, blog-single-startai.md, blog-jeremy-x.md, blog-both-x.md, post-x.md
+- **MCP-Compliant JSON Output**: All X content now generates exact schema for MCP consumption
+- **Enhanced Documentation**: X-Gen-System integration details in README and CLAUDE.md
+
+### Changed
+- **File Paths Updated**: X threads now save to `/home/jeremy/projects/content-nuke/x-threads/`
+- **Deployment Process**: Automated MCP posting via `python3 scripts/post_x_thread.py [filename]`
+- **Content Quality**: All X content now follows proven engagement patterns and accessibility standards
+
+### Deprecated
+- **Legacy Size Templates**: Replaced with intelligent X-Gen-System processing
+- **Manual Character Counting**: Now handled automatically with buffer calculations
+
 ## [1.0.1] - 2025-09-28
 ### Changed
 - Updated end-of-day status documentation and reporting

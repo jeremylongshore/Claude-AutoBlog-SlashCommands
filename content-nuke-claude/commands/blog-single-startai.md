@@ -12,7 +12,7 @@ Create a blog post for startaitools.com (technical audience) AND generate a Twit
 ### Phase 1: Analyze Working Session (Once)
 
 1. **Analyze ENTIRE Working Session**
-   - **Git History**: Check commits since the most recent post date in `/home/jeremy/projects/blog/startaitools/content/posts/` (fallback: last 14 days)
+   - **Git History**: Check commits since the most recent post date in `/home/jeremy/projects/blog/startaitools/content/posts/` (fallback: last 24 hours)
    - **Current Conversation**: Review the COMPLETE conversation history from this session
      - What problem were we solving?
      - What questions did Jeremy ask?
@@ -66,50 +66,39 @@ Create a blog post for startaitools.com (technical audience) AND generate a Twit
 
 ### Phase 4: Generate X Thread
 
-5. **Create X Thread Based on Size**
+5. **Generate X Thread with X-Gen-System**
 
-   **Size 1 (Single Tweet):**
-   - Hook + Key insight + Link + Hashtags
-   - Max 280 characters
+   **Input Processing:**
+   - Extract technical insights from blog post content
+   - Set X-Gen parameters for technical audience:
+     ```json
+     {
+       "topic": "[blog post title/focus]",
+       "raw": "[key technical insights from blog content]",
+       "goal": "clicks",
+       "tone": "expert",
+       "include_link": "[startaitools.com blog post URL]",
+       "hashtags": ["[relevant technical tags]"],
+       "cta_preference": "clicks",
+       "audience_level": "advanced",
+       "max_posts": "[user-specified 1-7]"
+     }
+     ```
 
-   **Size 2 (Mini Thread):**
-   - Tweet 1: Hook → Key insight
-   - Tweet 2: Link + CTA + Hashtags
+   **X-Gen Processing Pipeline:**
+   - Apply character budgeting (280 chars per post including numbering)
+   - Generate technical hook using proven patterns (mini-case, counter-intuitive)
+   - Structure content for technical audience engagement
+   - Integrate hashtags naturally (max 2, CamelCase, woven into text)
+   - Include StartAITools blog link with proper context
+   - Apply accessibility and compliance validation
 
-   **Size 3 (Quick Thread):**
-   - Tweet 1: Hook + what you built
-   - Tweet 2: Key technical insight or result
-   - Tweet 3: Link + CTA + Hashtags
-
-   **Size 4 (Short Thread):**
-   - Tweet 1: Hook + what you built
-   - Tweet 2: Problem you solved
-   - Tweet 3: Technical solution approach
-   - Tweet 4: Link + CTA + Hashtags
-
-   **Size 5 (Standard Thread):**
-   - Tweet 1: Hook + what you built
-   - Tweet 2: Problem context
-   - Tweet 3: Technical approach
-   - Tweet 4: Key result or insight
-   - Tweet 5: Link + CTA + Hashtags
-
-   **Size 6 (Medium Thread):**
-   - Tweet 1: Hook + what you built
-   - Tweet 2: Problem context
-   - Tweet 3: Technical approach
-   - Tweet 4: Key insight #1
-   - Tweet 5: Key insight #2
-   - Tweet 6: Link + CTA + Hashtags
-
-   **Size 7 (Extended Thread):**
-   - Tweet 1: Hook + what you built
-   - Tweet 2: Problem context
-   - Tweet 3: Technical approach
-   - Tweet 4: Key insight #1
-   - Tweet 5: Key insight #2
-   - Tweet 6: Results and impact
-   - Tweet 7: Link + CTA + Hashtags
+   **MCP-Compliant Output Generation:**
+   - Generate JSON payload for direct MCP consumption
+   - Include A/B variants for engagement testing
+   - Validate all posts ≤280 characters including numbering
+   - Ensure hashtag compliance and accessibility standards
+   - 100% schema compliance for automated posting
 
 ### Phase 5: Show Both for Review
 
@@ -129,16 +118,12 @@ Create a blog post for startaitools.com (technical audience) AND generate a Twit
    - Git commit: "feat: add blog post - [title]"
    - Git push to trigger Netlify deployment
 
-8. **Post X Thread Directly**
-   - **Load X API credentials from Waygate MCP:**
-     ```bash
-     export X_API_KEY="thpZd6tCyjgYJVTr0waBx2RolP"
-     export X_API_SECRET="tAnB8BhULV3J4sfP2HC5qSot5ShVHKxoNP60UoJWBlqZpFOTnh9"
-     export X_OAUTH2_ACCESS_TOKEN="YjJUUFJTN3g5Zl91eFJ2cjZGUEV6Q0k4OFdUYUpFOFF5X3Jmc3R6aXpzMkMzOjE3NTkwNDIwMTg0NzE6MTowOmF0OjE"
-     ```
-   - **Post thread directly to X/Twitter**
-   - **Chain replies for multi-tweet threads**
-   - **Save thread with metadata:** `/home/jeremy/projects/blog/x-threads/YYYY-MM-DD-slug-startai-x[size].md`
+8. **Deploy X Thread (MCP Integration)**
+   - Generate MCP-compliant JSON payload from X-Gen-System output
+   - Save to `/home/jeremy/projects/content-nuke/x-threads/YYYY-MM-DD-slug-startai-x[size].txt`
+   - Execute automated posting: `python3 scripts/post_x_thread.py [filename]`
+   - MCP handles OAuth credentials and API communication securely
+   - Verify posting success and track engagement metrics
 
 9. **Track Analytics (NEW)**
    - Import analytics helpers: `sys.path.append('/home/jeremy/analytics')`

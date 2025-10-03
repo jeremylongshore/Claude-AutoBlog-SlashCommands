@@ -80,11 +80,36 @@ Transform ONE working session into FOUR optimized content pieces for maximum rea
    - Cross-link to related personal posts
    - Tags: Personal development, learning-focused
 
-8. **X Thread** (Personal Tone with TL;DR)
-   - Format: TL;DR at START + personal insights + selected custom link
-   - Tone: Match JeremyLongshore blog (conversational, authentic)
-   - Focus: Quick insights, relatable experiences, growth moments
-   - Thread sizes 1-7 as defined in blog-startai-x command
+8. **X Thread Generation (X-Gen-System)**
+
+   **Input Processing:**
+   - Extract key insights from session analysis and JeremyLongshore blog content
+   - Set X-Gen parameters:
+     ```
+     {
+       "topic": "[derived from session focus]",
+       "raw": "[personal insights + technical learnings from session]",
+       "goal": "engagement",
+       "tone": "friendly",
+       "hashtags": ["[relevant technical tags]"],
+       "cta_preference": "ask",
+       "audience_level": "intermediate",
+       "max_posts": "[user-specified 1-7]"
+     }
+     ```
+
+   **X-Gen Processing:**
+   - Apply character budgeting (280 cap per post, including numbering)
+   - Generate engaging hook using proven patterns
+   - Structure: Hook → Personal insights → CTA (single) or Thread flow (numbered)
+   - Integrate hashtags naturally (max 2, CamelCase, woven into text)
+   - Apply accessibility rules and compliance checks
+
+   **MCP-Compliant Output:**
+   - Generate exact JSON schema for MCP API consumption
+   - Validate character limits, hashtag compliance, accessibility
+   - Include A/B variants for engagement optimization
+   - Ensure 100% schema compliance for automated posting
 
 9. **LinkedIn Post** (Company/Professional)
    - Format: Professional achievement post for Intent Solutions company page
@@ -115,17 +140,17 @@ Transform ONE working session into FOUR optimized content pieces for maximum rea
     - Run Hugo build and deploy
     - Git commit and push
 
-13. **Save X Thread**
-    - Save to `/home/jeremy/projects/blog/x-threads/YYYY-MM-DD-slug-nuclear-x[size].txt`
-    - Format with TL;DR at START
-    - Include selected custom link
-    - Include posting instructions
+13. **Deploy X Thread (MCP Integration)**
+    - Generate MCP-compliant JSON payload
+    - Save to `/home/jeremy/projects/content-nuke/x-threads/YYYY-MM-DD-slug-nuclear-x[size].txt`
+    - Execute automated posting: `python3 scripts/post_x_thread.py [filename]`
+    - Track analytics and performance metrics
 
 14. **Save LinkedIn Post**
-    - Save to `/home/jeremy/projects/blog/linkedin-posts/YYYY-MM-DD-slug-linkedin.txt`
-    - Include character count
-    - Include posting instructions for Intent Solutions company page
-    - Include hashtag suggestions
+    - Save to `/home/jeremy/projects/content-nuke/x-posts/YYYY-MM-DD-slug-linkedin.txt`
+    - Include character count and hashtag suggestions
+    - Format for Intent Solutions company page posting
+    - Include engagement optimization recommendations
 
 15. **Track Nuclear Analytics**
     - Import analytics helpers: `sys.path.append('/home/jeremy/analytics')`
@@ -213,8 +238,8 @@ User runs `/content-nuke` after completing a major technical implementation:
 ## Nuclear Deployment Files
 
 - **Blog Posts**: Auto-published to both sites with Hugo
-- **X Thread**: `/home/jeremy/projects/blog/x-threads/YYYY-MM-DD-slug-nuclear-x[size].txt`
-- **LinkedIn Post**: `/home/jeremy/projects/blog/linkedin-posts/YYYY-MM-DD-slug-linkedin.txt`
+- **X Thread**: `/home/jeremy/projects/content-nuke/x-threads/YYYY-MM-DD-slug-nuclear-x[size].txt` (MCP-compliant JSON)
+- **LinkedIn Post**: `/home/jeremy/projects/content-nuke/x-posts/YYYY-MM-DD-slug-linkedin.txt`
 - **Analytics**: All content tracked in unified database
 
 **Nuclear content multiplication achieved! 🚀**

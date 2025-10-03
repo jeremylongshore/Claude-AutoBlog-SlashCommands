@@ -3,7 +3,7 @@ Generate and publish a technical blog post to your WordPress blog that showcases
 ## Your Task
 
 1. **Analyze ENTIRE Working Session**
-   - **Git History**: Check commits since the most recent work session (fallback: last 14 days)
+   - **Git History**: Check commits since the most recent work session (fallback: last 24 hours)
    - **Current Conversation**: Review the COMPLETE conversation history from this session
      - What problem were we solving?
      - What questions did the user ask?
